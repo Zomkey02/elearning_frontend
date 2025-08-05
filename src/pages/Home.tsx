@@ -32,7 +32,7 @@ const Home = () => {
           and a space that helps you grow financially, one step at a time.
         </p>
         <Link to="/e-learning">
-          <button className="bg-[#6DAE81] text-white px-6 py-3 rounded-lg hover:bg-[#5b986f] transition">
+          <button className="bg-[#6DAE81] text-white px-6 py-3 rounded-lg hover:bg-[#5b986f] transition duration-300">
             Get started
           </button>
         </Link>
@@ -49,8 +49,8 @@ const Home = () => {
       <section className="py-20 px-6 bg-[#f8f8f8]">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-12 items-start justify-center">
           {/* LEFT TITLE */}
-          <div className="md:w-1/2 text-center md:text-left">
-            <h2 className="text-2xl md:text-4xl font-bold">
+          <div className='md:w-1/2 text-center md:text-left'>
+            <h2 className='text-2xl md:text-4xl font-bold'>
               It’s about time you had a place to learn investing that actually makes sense and feels like it’s made for you.
             </h2>
           </div>
@@ -138,14 +138,14 @@ const Home = () => {
 
       {/* Testimonial Section */}
       <section className='py-16'>
-        <h2 className='text-center text-3x1 font-semibold mb-12'>
+        <h2 className='text-center text-3xl font-semibold mb-12'>
           Proof that learning can be simple and fun
         </h2>
 
         <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
           {/* Card 1 */}
           <div className='bg-[#F7D6D6] p-6 rounded-lg shadow-md'>
-            <div className='text-sm font-semibold'>– Marie, 22</div>
+            <div className='text-sm font-semibold'> Marie, 22</div>
             <h3 className='text-lg font-semibold mt-2'>
               Keys to writing copy that actually converts and sells users
             </h3>
@@ -156,7 +156,7 @@ const Home = () => {
 
           {/* Card 2 */}
           <div className='bg-[#F7D6D6] p-6 rounded-lg shadow-md'>
-            <div className='text-sm font-semibold'>– Marie, 22</div>
+            <div className='text-sm font-semibold'> Marie, 22</div>
             <h3 className='text-lg font-semibold mt-2'>
               Keys to writing copy that actually converts and sells users
             </h3>
@@ -167,7 +167,7 @@ const Home = () => {
 
           {/* Card 3 */}
           <div className='bg-[#F7D6D6] p-6 rounded-lg shadow-md'>
-            <div className='text-sm font-semibold'>– Marie, 22</div>
+            <div className='text-sm font-semibold'> Marie, 22</div>
             <h3 className='text-lg font-semibold mt-2'>
               Keys to writing copy that actually converts and sells users
             </h3>
@@ -179,7 +179,7 @@ const Home = () => {
 
           {/* Card 4 */}
           <div className='bg-[#F7D6D6] p-6 rounded-lg shadow-md'>
-            <div className='text-sm font-semibold'>– Marie, 22</div>
+            <div className='text-sm font-semibold'> Marie, 22</div>
             <h3 className='text-lg font-semibold mt-2'>
               Keys to writing copy that actually converts and sells users
             </h3>
@@ -190,7 +190,7 @@ const Home = () => {
 
           {/* Card 5 */}
           <div className='bg-[#F7D6D6] p-6 rounded-lg shadow-md'>
-            <div className='text-sm font-semibold'>– Marie, 22</div>
+            <div className='text-sm font-semibold'> Marie, 22</div>
             <h3 className='text-lg font-semibold mt-2'>
               Keys to writing copy that actually converts and sells users
             </h3>

@@ -5,7 +5,7 @@ import http from '../utils/http';
 type Status = 'loading' | 'loggedIn' | 'loggedOut';
 
 type Auth = {
-    data: { id: number; username: string} | null;
+    data: { id: number; username: string; email: string; role: 'admin' | 'writer' | 'user';} | null;
     status: Status;
 };
 
@@ -41,6 +41,8 @@ const AuthProvider = ({ children }: Props) => {
                 data: {
                     id: userData.data.id,
                     username: userData.data.username,
+                    email: userData.data.email,
+                    role: userData.data.role
                 },
                 status: 'loggedIn',
                 });

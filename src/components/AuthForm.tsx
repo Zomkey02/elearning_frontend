@@ -2,10 +2,10 @@ import React from 'react'
 
 import {useForm} from 'react-hook-form'
 //import {DevTool} from '@hookform/devtools'
-import type { AuthFormData, Props } from '../types/Types'
+import type { AuthFormData, AuthFormProps } from '../types/Types'
 import http from '../utils/http';
 
-const AuthForm: React.FC<Props> = ({
+const AuthForm: React.FC<AuthFormProps> = ({
   legend,
   buttonText,
   endpoint,

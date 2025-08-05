@@ -5,7 +5,7 @@ export type AuthFormData = {
   password_confirmation: string;
 };
 
-export type Props = {
+export type AuthFormProps = {
   legend: string;
   buttonText: string;
   endpoint: string;
