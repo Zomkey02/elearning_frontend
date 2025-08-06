@@ -41,13 +41,10 @@ const CreateCourse = () => {
       courseFormData.append('duration', data.duration);
       courseFormData.append('status', data.status);
 
-      const response = await http.post('/api/course', courseFormData);
+      await http.post('/api/course', courseFormData);
 
-      if (response.status === 201) {
-        navigate('/dashboard');
-      } else {
-        console.error('Unexpected response:', response);
-      }
+      navigate('/dashboard');
+      
     } catch (error) {
       const err = error as ErrorResponse;
       const validationErrors = err.response?.data?.errors;
@@ -64,7 +61,10 @@ const CreateCourse = () => {
   }
 
   return (
-    <CourseForm onSubmit={onSubmit} legend='Create a New Course' />
+    <CourseForm 
+      onSubmit={onSubmit}
+      mode = 'create' 
+    />
   )
 }
 

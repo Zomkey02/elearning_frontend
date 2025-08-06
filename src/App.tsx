@@ -15,7 +15,9 @@ import Dashboard from './pages/Dashboard'
 import ELearning from './pages/ELearning'
 
 import CreateCourse from './pages/CreateCourse'
+import UpdateCourse from './pages/UpdateCourse'
 import CreateLesson from './pages/CreateLesson'
+import SingleCourse from './pages/SingleCourse'
 
 
 
@@ -27,12 +29,15 @@ const router = createBrowserRouter(
         <Route path="login" element={<Login/>} />
         <Route path="signup" element={<SignUp/>} />
         <Route path="elearning" element={<ELearning/>} />
+        <Route path="course/:courseId" element={<SingleCourse/>} />
 
         
 
         <Route element = {<PrivateLayout />}>
           <Route path="dashboard" element={<Dashboard/>} />
           <Route path="course/create" element={<CreateCourse/>} />
+          <Route path="course/update/:courseId" element={<UpdateCourse/>} />
+
           <Route path= "lesson/create" element={<CreateLesson/>} />
 
         </Route>
