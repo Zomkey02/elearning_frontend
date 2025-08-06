@@ -16,7 +16,7 @@ const ELearning: React.FC = () => {
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const response = await http.get('/api/courses');
+        const response = await http.get(`/api/courses`);
         setCourses(response.data.courses);
       } catch (error) {
         console.error('Failed to fetch courses:', error);
@@ -39,13 +39,13 @@ const ELearning: React.FC = () => {
       <div className='bg-green-200 rounded-xl shadow-lg w-full max-w-5xl p-6'>
 
         <div className='flex space-x-4 mb-6'>
-          <button className='px-4 px-2 bg-white text-black font-semibold rounden-t-md shadow-inner'>
+          <button className='px-4 py-2 bg-white text-black font-semibold rounden-t-md shadow-inner'>
             Investing
           </button>
-          <button className='px-4 px-2 bg-green-300 text-black font-semibold rounden-t-md'>
+          <button className='px-4 py-2 bg-green-300 text-black font-semibold rounden-t-md'>
             Personal Finance
           </button>
-          <button className='px-4 px-2 bg-green-300 text-black font-semibold rounden-t-md'>
+          <button className='px-4 py-2 bg-green-300 text-black font-semibold rounden-t-md'>
             Lorem ipsum
           </button>
         </div>
