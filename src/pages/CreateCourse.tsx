@@ -43,7 +43,7 @@ const CreateCourse = () => {
 
       await http.post('/api/course', courseFormData);
 
-      navigate('/dashboard');
+      navigate('/elearning');
       
     } catch (error) {
       const err = error as ErrorResponse;

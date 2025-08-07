@@ -19,6 +19,7 @@ import UpdateCourse from './pages/UpdateCourse'
 import CreateLesson from './pages/CreateLesson'
 import SingleCourse from './pages/SingleCourse'
 import SingleLesson from './pages/SingleLesson'
+import UpdateLesson from './pages/UpdateLesson'
 
 
 
@@ -31,17 +32,17 @@ const router = createBrowserRouter(
         <Route path="signup" element={<SignUp/>} />
         <Route path="elearning" element={<ELearning/>} />
         <Route path="course/:courseId" element={<SingleCourse/>} />
-        <Route path="/course/:courseId/lesson/:lessonId" element={<SingleLesson/>} />
-
-
-        
+        <Route path="course/:courseId/lesson/:lessonId" element={<SingleLesson/>} />
 
         <Route element = {<PrivateLayout />}>
           <Route path="dashboard" element={<Dashboard/>} />
           <Route path="course/create" element={<CreateCourse/>} />
           <Route path="course/update/:courseId" element={<UpdateCourse/>} />
 
-          <Route path= "lesson/create" element={<CreateLesson/>} />
+          
+          <Route path="lesson/create" element={<CreateLesson />} />
+          <Route path= "course/:courseId/lesson/create" element={<CreateLesson/>} />
+          <Route path= "course/:courseId/lesson/update/:lessonId" element={<UpdateLesson/>} />
 
         </Route>
 

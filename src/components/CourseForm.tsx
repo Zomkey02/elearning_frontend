@@ -82,7 +82,7 @@ const CourseForm: React.FC<CourseFormProps> = ({ onSubmit, defaultValues, mode }
         
         {defaultValues?.thumbnailUrl && (
           <div className="mb-4">
-            <p className="text-sm mb-1">Aktuelles Bild:</p>
+            <p className="text-sm mb-1">Current Thumbnail:</p>
             <img 
               src={defaultValues.thumbnailUrl} 
               alt="Thumbnail" 
@@ -126,8 +126,9 @@ const CourseForm: React.FC<CourseFormProps> = ({ onSubmit, defaultValues, mode }
           <select 
             {...register('status', { required: 'Status is required' })} 
             className='w-full h-14 p-4 rounded-xl bg-gray-200'
+            defaultValue=''
           >
-              <option value=''>Status</option>
+              <option value='' disabled>Select Status</option>
               <option value='draft'>Draft</option>
               <option value='published'>Publish</option>
           </select>

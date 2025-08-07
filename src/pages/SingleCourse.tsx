@@ -80,10 +80,18 @@ const SingleCourse: React.FC = () => {
 
         <div className='mt-6'>
             <h2 className='text-2xl font-semibold mb-4'>Lessons</h2>
+
+            <div className='mb-10'>
+                <h3 className='text-xl font-semibold mb-4'>Lessons</h3>
+                <div className='flex gap-4 flex-wrap'>
+                    <Link to={`/course/${courseId}/lesson/create`} className='bg-green-600 text-white px-4 py-2 rounded hover:bg-green-800'>
+                        Create Lesson
+                    </Link>
+                </div>
+            </div>
             
             {course.lessons && course.lessons.length > 0 ? (        
-                course.lessons.map((lesson) => (
-                    
+                course.lessons?.map((lesson: any) => (
                     <LessonCard
                         key={lesson.id}
                         courseId={courseId}
