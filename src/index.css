@@ -1,21 +1,79 @@
 @import "tailwindcss";
 
-
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+@font-face {
+  font-family: 'Manrope';
+  src: url('./assets/fonts/Manrope-Regular.ttf');
   font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-style: normal;
 }
 
-body {
-  @apply bg-[#fdfdfd] text-black font-sans;
+@font-face {
+  font-family: 'Manrope';
+  src: url('./assets/fonts/Manrope-SemiBold.ttf');
+  font-weight: 600;
+  font-style: normal;
 }
+
+@font-face {
+  font-family: 'Manrope';
+  src: url('./assets/fonts/Manrope-Bold.ttf');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@layer base {
+  html {
+    @apply text-base leading-relaxed;
+  }
+  body {
+    @apply bg-[#fdfdfd] text-black font-sans;
+  }
+  h1 {
+    @apply font-bold text-4xl leading-tight text-gray-900;
+  }
+
+  h2 {
+    @apply font-semibold text-3xl leading-snug text-gray-800;
+  }
+  h3 {
+    @apply font-semibold text-3xl leading-snug text-gray-800;
+  }
+
+  p {
+    @apply font-normal text-base leading-relaxed text-gray-700;
+  }
+
+  a {
+    @apply text-[#6DAE81] hover:text-[#5b986f] transition;
+  }
+}
+
+@layer components {
+  /* Custom Link Styles */
+  .link-nav {
+    @apply px-2 py-1 text-[#6DAE81] font-semibold hover:text-[#5b986f]
+  }
+  /* Custom button sytles*/
+  .btn-hero{
+    @apply bg-[#6DAE81] text-white px-6 py-3 font-semibold text-3xl rounded-lg hover:bg-[#5b986f] transition;
+  }
+
+  .btn-primary {
+    @apply bg-[#6DAE81] text-white px-6 py-2 rounded-lg hover:bg-[#5b986f] transition;
+  }
+  
+  .btn-nav {
+    @apply bg-[#6DAE81] text-white px-5 py-1 rounded-lg font-semibold hover:shadow-md transition;
+  }
+
+  .btn-edit {
+    @apply border-2 border-[#6DAE81] px-4 py-1 rounded-lg hover:bg-[#6DAE81] hover:text-white;
+  }
+
+  .btn-delete {
+    @apply border-2 border-[#EF476F] px-4 py-1 rounded-lg hover:bg-[#EF476F] hover:text-white;
+  }
+
+}
+
+

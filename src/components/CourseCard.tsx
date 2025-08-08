@@ -49,11 +49,11 @@ const CourseCard:React.FC<CourseCardProps> = ({ courseId, title, summary, durati
         {auth?.data?.role === 'admin' && onDelete && (
             <div className='flex justify-end p-4 gap-2'>
                 <Link to={`/course/update/${courseId}`}>
-                    <button className='px-4 py-2 bg-blue-500 text-white text-sm rounded hover:bg-blue-600'>Edit</button>
+                    <button className=' btn-edit'>Edit</button>
                 </Link>
                 <button 
                     onClick={onDelete}
-                    className='px-4 py-2 bg-red-500 text-white text-sm rounded hover:bg-red-600'
+                    className='btn-delete'
                 >
                     Delete
                 </button>

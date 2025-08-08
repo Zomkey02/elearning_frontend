@@ -25,11 +25,11 @@ const LessonCard: React.FC<LessonCardProps> = ({courseId, lessonId, title, descr
         {isAdmin && (
           <div className='flex justify-start gap-2 mt-4'>
             <Link to={`/course/${courseId}/lesson/update/${lessonId}`}>
-              <button className='px-4 py-2 bg-blue-500 text-white text-sm rounded hover:bg-blue-600'>
+              <button className='btn-edit'>
                 Edit
               </button>
             </Link>
-            <button onClick={onDelete} className='px-4 py-2 bg-red-500 text-white text-sm rounded hover:bg-red-600'>
+            <button onClick={onDelete} className='btn-delete'>
               Delete
             </button>
           </div>

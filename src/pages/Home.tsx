@@ -1,27 +1,28 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import LogoThree from '../assets/logos/logo_three.svg'
 
 const Home = () => {
   return (
      <div className="w-full">
       {/* Hero Section */}
-      <section className="relative h-[80vh] bg-gray-200 flex items-center justify-center">
-        {/* Placeholder for Image */}
-        <div className="absolute inset-0 bg-gray-400 flex items-center justify-center">
-          <div className="text-white text-2xl font-bold">IMAGE PLACEHOLDER</div>
+      <section className="relative h-[70vh] flex items-center justify-center">
+        {/* Logo Image */}
+        <div className="absolute flex items-center justify-center">
+            <img src={LogoThree} alt='Logo Img as background' className='h-[50vh] w-auto'/>
         </div>
 
         {/* Overlay Text */}
-        <div className="relative z-10 text-center text-white">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-widest uppercase">
+        <div className="relative z-10 text-center text-primary">
+          <h1 className="sm:text-5xl md:text-6xl tracking-widest uppercase">
             Grow your money, your way
           </h1>
         </div>
       </section>
 
       {/* Learn Investing Section */}
-      <section className="py-16 px-6 bg-white text-center max-w-4xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold mb-6">
+      <section className="py-16 px-6 text-center max-w-4xl mx-auto">
+        <h2 className="text-4xl md:text-5xl mb-6">
           Learn investing, made easy
         </h2>
         <p className="text-lg md:text-xl text-gray-700 mb-8">
@@ -32,7 +33,7 @@ const Home = () => {
           and a space that helps you grow financially, one step at a time.
         </p>
         <Link to="/e-learning">
-          <button className="bg-[#6DAE81] text-white px-6 py-3 rounded-lg hover:bg-[#5b986f] transition duration-300">
+          <button className='btn-hero'>
             Get started
           </button>
         </Link>

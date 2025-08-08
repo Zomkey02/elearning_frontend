@@ -35,23 +35,23 @@ const ELearning: React.FC = () => {
   };
   
   return (
-    <div className='flex justify-center  min-h-screen'>
-      <div className='bg-green-200 rounded-xl shadow-lg w-full max-w-5xl p-6'>
+    <div className='flex justify-center min-h-screen'>
+      <div className='bg-[#A7DCA5] rounded-xl shadow-lg w-full max-w-5xl p-6'>
 
         <div className='flex space-x-4 mb-6'>
           <button className='px-4 py-2 bg-white text-black font-semibold rounden-t-md shadow-inner'>
             Investing
           </button>
-          <button className='px-4 py-2 bg-green-300 text-black font-semibold rounden-t-md'>
+          <button className='px-4 py-2 bg-[#A7DCA5] text-black font-semibold rounden-t-md'>
             Personal Finance
           </button>
-          <button className='px-4 py-2 bg-green-300 text-black font-semibold rounden-t-md'>
+          <button className='px-4 py-2 bg-[#A7DCA5] text-black font-semibold rounden-t-md'>
             Lorem ipsum
           </button>
         </div>
 
+        {/* Course Cards */}
         <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6'>
-        
           {courses.map((course) => (
             <CourseCard
               key={course.id}
@@ -63,9 +63,8 @@ const ELearning: React.FC = () => {
               onDelete={() => handleDelete(course.id)}
             />
           ))}
-          
         </div>
-
+        
       </div>
 
     </div>

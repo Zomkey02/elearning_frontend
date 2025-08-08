@@ -82,9 +82,8 @@ const SingleCourse: React.FC = () => {
             <h2 className='text-2xl font-semibold mb-4'>Lessons</h2>
 
             <div className='mb-10'>
-                <h3 className='text-xl font-semibold mb-4'>Lessons</h3>
                 <div className='flex gap-4 flex-wrap'>
-                    <Link to={`/course/${courseId}/lesson/create`} className='bg-green-600 text-white px-4 py-2 rounded hover:bg-green-800'>
+                    <Link to={`/course/${courseId}/lesson/create`} className='btn-primary'>
                         Create Lesson
                     </Link>
                 </div>
