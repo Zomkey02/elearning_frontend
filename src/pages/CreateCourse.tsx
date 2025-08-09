@@ -3,16 +3,8 @@ import CourseForm from '../components/CourseForm';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import http from '../utils/http';
+import type { CourseFormValues } from '../types/elearning';
 
-type CourseFormValues = {
-  title: string;
-  slug: string;
-  summary: string;
-  thumbnail: FileList;
-  description: string;
-  duration: string;
-  status: string;
-};
 
 interface ErrorResponse {
   response?: {
@@ -38,7 +30,7 @@ const CreateCourse = () => {
         courseFormData.append('thumbnail', data.thumbnail[0]);
       }
       courseFormData.append('description', data.description);
-      courseFormData.append('duration', data.duration);
+      courseFormData.append('duration', String(data.duration));
       courseFormData.append('status', data.status);
 
       await http.post('/api/course', courseFormData);
