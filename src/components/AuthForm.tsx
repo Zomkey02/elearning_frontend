@@ -38,18 +38,18 @@ const AuthForm: React.FC<AuthFormProps> = ({
   }; 
 
   return (
-    <div className='min-h-screen flex items-center justify-center px-4'>
+    <div className='flex items-center justify-center min-h-screen px-4'>
       <form 
        onSubmit={handleSubmit(onSubmit)}
-       className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 max-w-md w-full'>
+       className='w-full max-w-md px-8 pt-6 pb-8 mb-4 bg-white rounded shadow-md'>
         <fieldset>
-          <legend className='text-2xl font-bold mb-6 text-center'>{legend}</legend>
+          <legend className='mb-6 text-2xl font-bold text-center'>{legend}</legend>
 
           {includeUsername && (
             <div className='mb-4'>
               <label 
                htmlFor='username'
-               className='block text-gray-700 text-sm font-semibold mb-2'
+               className='block mb-2 text-sm font-semibold text-gray-700'
               >Username:
               </label>
               <input 
@@ -59,13 +59,13 @@ const AuthForm: React.FC<AuthFormProps> = ({
                {...register('username', { required: 'Username is required' })}
               />
               <div>
-                {errors.username && <div className='text-red-500 text-sm mt-1 hidden'>{errors.username.message}</div>}
+                {errors.username && <div className='mt-1 text-sm text-red-500 '>{errors.username.message}</div>}
               </div>
             </div>
           )}
 
           <div className="mb-4">
-            <label htmlFor="email" className="block text-gray-700 text-sm font-semibold mb-2">
+            <label htmlFor="email" className="block mb-2 text-sm font-semibold text-gray-700">
               Email
             </label>
             <input
@@ -81,12 +81,12 @@ const AuthForm: React.FC<AuthFormProps> = ({
               })}
             />
             <div>
-                {errors.email && <div className='text-red-500 text-sm mt-1 hidden'>{errors.email.message}</div>}
+                {errors.email && <div className='mt-1 text-sm text-red-500'>{errors.email.message}</div>}
             </div>
           </div>
 
           <div className="mb-6">
-            <label htmlFor="password" className="block text-gray-700 text-sm font-semibold mb-2">
+            <label htmlFor="password" className="block mb-2 text-sm font-semibold text-gray-700">
               Password
             </label>
             <input
@@ -103,13 +103,13 @@ const AuthForm: React.FC<AuthFormProps> = ({
               })}
             />
             <div>
-                {errors.password && <div className='text-red-500 text-sm mt-1 hidden'>{errors.password.message}</div>}
+                {errors.password && <div className='mt-1 text-sm text-red-500'>{errors.password.message}</div>}
             </div>
           </div>
           
           {includePasswordConfirmation && (
             <div className="mb-6">
-              <label htmlFor="password_confirmation" className="block text-gray-700 text-sm font-semibold mb-2">
+              <label htmlFor="password_confirmation" className="block mb-2 text-sm font-semibold text-gray-700">
                 Confirm Password
               </label>
               <input
@@ -125,7 +125,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
               />
               <div>
                 {errors.password_confirmation && (
-                  <div className="text-red-500 text-sm mt-1">{errors.password_confirmation.message}</div>
+                  <div className="mt-1 text-sm text-red-500">{errors.password_confirmation.message}</div>
                 )}
               </div>
             </div>
