@@ -1,23 +1,10 @@
 import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import slugify from 'slugify'
-
-type LessonFormValues = {
-    course_id: string
-    title: string
-    slug: string
-    summary: string
-    content: string
-    thumbnail: FileList
-    duration: number
-    level: 'beginner' | 'intermediate' | 'advanced'
-    status: 'draft' | 'published'
-    layout_type: 'standard' | 'video-focused' | 'image-left' | 'interactive'
-    thumbnailUrl?: string;
-}
+import type { LessonFormValues } from '../types/elearning'
 
 type LessonFormProps = {
-    onSubmit: (data: LessonFormValues) => void
+    onSubmit: (data: LessonFormValues) => void;
     defaultValues?: Partial<LessonFormValues>
     mode: 'create' | 'update'
     courses: { id: string; title: string } []
@@ -33,9 +20,6 @@ const LessonForm: React.FC<LessonFormProps> = ({ onSubmit, defaultValues, mode, 
         setValue,
         formState: { errors, isSubmitting },
     } = useForm<LessonFormValues>({ defaultValues })
-
-    console.log('LessonForm defaultValues:', defaultValues);
-    console.log('LessonForm courses:', courses);
 
     const title = watch('title')
 
@@ -59,8 +43,8 @@ const LessonForm: React.FC<LessonFormProps> = ({ onSubmit, defaultValues, mode, 
 
 
 return (
-    <form onSubmit={handleSubmit(onSubmit)} className='max-w-3xl mx-auto w-full space-y-4'>
-        <h2 className='text-center text-2xl font-bold'>
+    <form onSubmit={handleSubmit(onSubmit)} className='w-full max-w-3xl mx-auto space-y-4'>
+        <h2 className='text-2xl font-bold text-center'>
             {mode === 'create' ? 'Create a new lesson' : 'Update a lesson'}
         </h2>
 
@@ -95,13 +79,13 @@ return (
           <input 
             {...register('slug')} 
             placeholder='Slug' 
-            className='w-full h-14 p-4 bg-gray-200 rounded-xl' 
+            className='w-full p-4 bg-gray-200 h-14 rounded-xl' 
           />
         </div>
 
         {defaultValues?.thumbnailUrl && (
           <div className="mb-4">
-            <p className="text-sm mb-1">Current Thumbnail:</p>
+            <p className="mb-1 text-sm">Current Thumbnail:</p>
             <img 
               src={defaultValues.thumbnailUrl} 
               alt="Thumbnail" 
@@ -111,21 +95,21 @@ return (
         )}
 
         <div>
-          <label className='flex flex-col items-center rounded-xl border-2 border-dashed border-[#d4e2d4] px-6 py-14 cursor-pointer bg-green-300 text-center'>
-            <p className='text-lg font-bold tracking-tight mb-1'>Upload Thumbnail</p>
-            <p className='text-sm max-w-xs'>Click to upload</p>
+          <label className='flex flex-col items-center rounded-xl px-6 py-14 cursor-pointer bg-[#6DAE81] text-center'>
+            <p className='mb-1 text-lg font-bold tracking-tight text-white'>Upload Thumbnail</p>
+            <p className='max-w-xs text-sm text-white'>Click to upload</p>
             <input type="file" className='hidden'
               {...register('thumbnail', {required: mode === 'create' ? 'Thumbnail is required' : false})} 
             />
           </label>
-          {errors.thumbnail && <p className='mt-1 text-red-500 text-sm'>{errors.thumbnail.message}</p>}
+          {errors.thumbnail && <p className='mt-1 text-sm text-red-500'>{errors.thumbnail.message}</p>}
         </div>
 
         <div>
           <input 
             {...register('summary', { required: 'Summary is required' })} 
             placeholder='Summary' 
-            className='w-full h-14 p-4 bg-gray-200 rounded-xl' 
+            className='w-full p-4 bg-gray-200 h-14 rounded-xl' 
           />
           {errors.summary && <p className='text-red-500'>{errors.summary.message}</p>}
         </div>
@@ -145,7 +129,7 @@ return (
             type='number'
             {...register('duration', { required: 'Duration is required', valueAsNumber:true })} 
             placeholder='Duration' 
-            className='w-full h-14 p-4 bg-gray-200 rounded-xl' 
+            className='w-full p-4 bg-gray-200 h-14 rounded-xl' 
           />
           {errors.duration && <p className='text-red-500'>{errors.duration.message}</p>}
         </div>
@@ -153,7 +137,7 @@ return (
         <div>
           <select 
             {...register('level', { required: 'Level is required' })} 
-            className='w-full h-14 p-4 rounded-xl bg-gray-200'
+            className='w-full p-4 bg-gray-200 h-14 rounded-xl'
           >
               <option value='beginner'>Beginner</option>
               <option value='intermediate'>Intermediate</option>
@@ -165,7 +149,7 @@ return (
         <div>
           <select 
             {...register('status', { required: 'Status is required' })} 
-            className='w-full h-14 p-4 rounded-xl bg-gray-200'
+            className='w-full p-4 bg-gray-200 h-14 rounded-xl'
           >
               <option value='' disabled>Select Status</option>
               <option value='draft'>Draft</option>
@@ -177,7 +161,7 @@ return (
         <div>
           <select 
             {...register('layout_type', { required: 'Layout type is required' })} 
-            className='w-full h-14 p-4 rounded-xl bg-gray-200'
+            className='w-full p-4 bg-gray-200 h-14 rounded-xl'
           >
               <option value='' disabled>Select Layout Type</option>
               <option value='standard'>Standard</option>

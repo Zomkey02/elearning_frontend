@@ -1,54 +1,49 @@
 import React, { useContext } from 'react'
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../context/AuthProvider';
+import { getThumbnailUrl } from '../utils/getThumbnailUrl';
+import type { Course } from '../types/elearning';
 
 interface CourseCardProps {
-  courseId: number;
-  title: string;
-  summary: string;
-  duration: string;
-  thumbnail?: string;
-  onDelete?: () => void;
+    /* course: Pick<Course, 'id' | 'title' | 'summary' | 'duration' | 'thumbnail'>; */
+    course: Course;
+    onDelete?: () => void;
 }
 
-const CourseCard:React.FC<CourseCardProps> = ({ courseId, title, summary, duration, thumbnail, onDelete }) => {
+const CourseCard:React.FC<CourseCardProps> = ({ course, onDelete }) => {
     const {auth} = useContext(AuthContext);
+    const isAdmin = auth?.data?.role === 'admin';
+    const thumbnailUrl = getThumbnailUrl(course.thumbnail ?? null);
 
   return (
-    <div className='rounded-xl overflow-hidden shadow-md bg-white'>
-        <Link to={`/course/${courseId}`}>
+    <div className='overflow-hidden bg-white shadow-md rounded-xl'>
+        <Link to={`/course/${course.id}`}>
 
             {/* Thumbnail */}
-            {thumbnail ? (
+            {thumbnailUrl ? (
             <img
-                src={
-                    thumbnail.startsWith('http')
-                    ? thumbnail
-                    : thumbnail.startsWith('storage/')
-                        ? `http://localhost:8000/${thumbnail}`
-                        : `http://localhost:8000/storage/${thumbnail}`
-                }
-                alt={title}
-                className="w-full h-48 object-cover"
+                src={thumbnailUrl}
+                alt={course.title}
+                className="object-cover w-full h-48"
                 />
             ) : (
-            <div className='w-full h-48 bg-gray-300 flex items-center justify-center text-gray-600'>
+            <div className='flex items-center justify-center w-full h-48 text-gray-600 bg-gray-300'>
                 No Image
             </div>
             )}
 
             {/* Info */}
             <div className='p-4'>
-            <h3 className='text-xl font-semibold mb-1'>{title}</h3>
-            <p className='text-gray-600 text-sm mb-2'>{summary}</p>
-            <p className='text-sm text-gray-500'>Duration: {duration}</p>
+            <h3 className='mb-1 text-xl font-semibold'>{course.title}</h3>
+            <p className='mb-2 text-sm text-gray-600'>{course.summary}</p>
+            <p className='text-sm text-gray-500'>Duration: {course.duration}</p>
             </div>
         </Link>
 
         {/* Buttons if admin is logged in */}
-        {auth?.data?.role === 'admin' && onDelete && (
-            <div className='flex justify-end p-4 gap-2'>
-                <Link to={`/course/update/${courseId}`}>
+        {isAdmin && onDelete && (
+            <div className='flex justify-end gap-2 p-4'>
+                <Link to={`/course/update/${course.id}`}>
                     <button className=' btn-edit'>Edit</button>
                 </Link>
                 <button 

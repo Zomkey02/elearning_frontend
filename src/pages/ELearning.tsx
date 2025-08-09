@@ -1,14 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import CourseCard from '../components/CourseCard'
 import http from '../utils/http'
+import type {Course} from '../types/elearning'
 
-type Course = {
-  id: number;
-  title: string;
-  summary: string;
-  duration: string;
-  thumbnail?: string;
-};
+type CourseResponse = { courses: Course[] };
 
 const ELearning: React.FC = () => {
   const [courses, setCourses] = useState<Course[]>([]);
@@ -16,8 +11,8 @@ const ELearning: React.FC = () => {
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const response = await http.get(`/api/courses`);
-        setCourses(response.data.courses);
+        const {data} = await http.get<CourseResponse>(`/api/courses`);
+        setCourses(Array.isArray(data.courses) ? data.courses : []);
       } catch (error) {
         console.error('Failed to fetch courses:', error);
       }
@@ -35,31 +30,28 @@ const ELearning: React.FC = () => {
   };
   
   return (
-    <div className='flex justify-center min-h-screen'>
-      <div className='bg-[#A7DCA5] rounded-xl shadow-lg w-full max-w-5xl p-6'>
-
-        <div className='flex space-x-4 mb-6'>
-          <button className='px-4 py-2 bg-white text-black font-semibold rounden-t-md shadow-inner'>
+    <div className='grid max-w-6xl place-items-center'>
+      <div className='w-full pl-4'>
+        <div className='flex mb-0 space-x-4'>
+          <button className='px-4 py-2 bg-white text-black font-semibold rounded-lg shadow-outer border-3 border-[#A7DCA5]'>
             Investing
           </button>
-          <button className='px-4 py-2 bg-[#A7DCA5] text-black font-semibold rounden-t-md'>
+          <button className='px-4 py-2 font-semibold text-black rounded-lg bg-primary'>
             Personal Finance
           </button>
-          <button className='px-4 py-2 bg-[#A7DCA5] text-black font-semibold rounden-t-md'>
+          <button className='px-4 py-2 font-semibold text-black rounded-lg bg-midnight'>
             Lorem ipsum
           </button>
         </div>
+      </div>
+      <div className='bg-[#A7DCA5] rounded-xl shadow-lg p-6'>
 
         {/* Course Cards */}
-        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6'>
+        <div className='grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3'>
           {courses.map((course) => (
             <CourseCard
               key={course.id}
-              courseId={course.id}
-              title={course.title}
-              summary={course.summary}
-              duration={course.duration}
-              thumbnail={course.thumbnail}
+              course={course}
               onDelete={() => handleDelete(course.id)}
             />
           ))}

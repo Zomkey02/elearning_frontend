@@ -3,19 +3,9 @@ import LessonForm from '../components/LessonForm'
 import { useNavigate, useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import http from '../utils/http';
+import type { LessonFormValues } from '../types/elearning';
 
-type LessonFormValues = {
-  course_id: string;
-  title: string
-  slug: string
-  summary: string
-  content: string
-  thumbnail: FileList
-  duration: number
-  level: 'beginner' | 'intermediate' | 'advanced'
-  status: 'draft' | 'published'
-  layout_type: 'standard' | 'video-focused' | 'image-left' | 'interactive'
-}
+
 interface ErrorResponse {
   response?: {
     data?: {
@@ -43,7 +33,7 @@ const CreateLesson = () => {
     fetchCourses();
   }, [courseId]);
 
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (data: LessonFormValues) => {
 
     try {
       await http.get('/sanctum/csrf-cookie');

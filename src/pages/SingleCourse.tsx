@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import http from '../utils/http'
 import LessonCard from '../components/LessonCard'
+import { getThumbnailUrl } from '../utils/getThumbnailUrl'
+import type {Course, Lesson} from '../types/elearning'
+import { AuthContext } from '../context/AuthProvider'
 
-interface Lesson {
+/* interface Lesson {
     id: number
     title: string
     description: string
@@ -16,28 +19,36 @@ interface SingleCourse {
     summary: string
     description: string
     lessons?: Lesson[]
-}
+} */
+
+type CourseResponse = { course: Course };
 
 const SingleCourse: React.FC = () => {
     const { courseId } = useParams<{ courseId: string }>()
-    const [course, setCourse] = useState<SingleCourse | null>(null)  
+    if (!courseId) return null;
+    const [course, setCourse] = useState<Course | null>(null)  
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)
+    const {auth} = useContext(AuthContext);
+    const isAdmin = auth?.data?.role === 'admin';
 
     useEffect(() => {
         const fetchCourse = async () => {
             try {
-                const response = await http.get(`/api/course/${courseId}`);
-                console.log('Api response', response.data);
-                
-                setCourse(response.data.course)
+                if (!courseId) {
+                    setError('Missing courseId');
+                    return;
+                }
+                const {data} = await http.get<CourseResponse>(`/api/course/${courseId}`);
+                setCourse(data.course);
 
-                if (!response.data.course.lessons || response.data.course.lessons.length === 0) {
+                if (!data.course.lessons || data.course.lessons.length === 0) {
                     console.warn('No lessons found for this course')
                 }
-            } catch (err: any) {
+            } catch (err) {
+                const msg = err instanceof Error ? err.message: 'Unknown error';
                 console.error('Failed to fetch courses:', err);
-                setError(err.message);
+                setError(msg);
             } finally {
                 setLoading(false)
             }
@@ -50,26 +61,33 @@ const SingleCourse: React.FC = () => {
     if (!course) return <div className="p-6">No course found</div>
 
 
-    const thumbnailUrl = course.thumbnail
-        ? course.thumbnail.startsWith('http')
-            ? course.thumbnail
-            : course.thumbnail.startsWith('storage/')
-            ? `http://localhost:8000/${course.thumbnail}`
-            : `http://localhost:8000/storage/${course.thumbnail}`
-        :null
+    const thumbnailUrl = getThumbnailUrl(course.thumbnail ?? null);
 
+  const handleDeleteLesson = async (lessonId: number) => {
+    try {
+      await http.delete(`/api/course/${courseId}/lesson/delete/${lessonId}`);
+      setCourse(prev => 
+        prev
+            ? {...prev, lessons: (prev.lessons ?? []).filter(lesson => lesson.id !== lessonId)}
+            : prev
+      );
+    } catch (error) {
+      console.error('Failed to delete lesson:', error);
+    }
+  };
+    
   return (
-    <div className='max-w-4xl mx-auto p-6 space-y-6'>
+    <div className='max-w-4xl p-6 mx-auto space-y-6'>
         <div className='space-y-2'>
             {/* Thumbnail */}
             {thumbnailUrl ? (
                 <img
                     src={ thumbnailUrl }
                     alt={course.title}
-                    className="w-full h-64 object-cover rounded-lg shadow"
+                    className="object-cover w-full h-64 rounded-lg shadow"
                     />
                 ) : (
-                <div className='w-full h-64 bg-gray-300 flex items-center justify-center text-gray-600 rounded-lg shadow'>
+                <div className='flex items-center justify-center w-full h-64 text-gray-600 bg-gray-300 rounded-lg shadow'>
                     No Image
                 </div>
             )}
@@ -79,24 +97,25 @@ const SingleCourse: React.FC = () => {
         </div>
 
         <div className='mt-6'>
-            <h2 className='text-2xl font-semibold mb-4'>Lessons</h2>
+            <h2 className='mb-4 text-2xl font-semibold'>Lessons</h2>
 
-            <div className='mb-10'>
-                <div className='flex gap-4 flex-wrap'>
-                    <Link to={`/course/${courseId}/lesson/create`} className='btn-primary'>
-                        Create Lesson
-                    </Link>
+            {isAdmin && (
+                <div className='mb-10'>
+                    <div className='flex flex-wrap gap-4'>
+                        <Link to={`/course/${courseId}/lesson/create`} className='btn-primary'>
+                            Create Lesson
+                        </Link>
+                    </div>
                 </div>
-            </div>
+            )}
             
             {course.lessons && course.lessons.length > 0 ? (        
-                course.lessons?.map((lesson: any) => (
+                course.lessons?.map((lesson: Lesson) => (
                     <LessonCard
                         key={lesson.id}
                         courseId={courseId}
-                        lessonId={lesson.id}
-                        title={lesson.title}
-                        description={lesson.description}
+                        lesson={lesson}
+                        onDelete={() => handleDeleteLesson(lesson.id)}
                     />
                     )) 
                 ) : (
