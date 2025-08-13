@@ -14,8 +14,3 @@ export type AuthFormProps = {
   includePasswordConfirmation?: boolean;
 };
 
-// Navbar Link 
-export type ListItemProps = {
-  children: React.ReactNode;
-  NavLink: string;
-};

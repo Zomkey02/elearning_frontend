@@ -3,8 +3,7 @@ import React, { useContext, useState } from "react";
 import { Link } from 'react-router-dom'
 import { AuthContext } from "../context/AuthProvider";
 import LogOut from "./Logout";
-import type { ListItemProps } from "../types/Types";
-import logoOne from '../assets/logos/logo_one.svg';
+import LogoTwo from "../assets/logos/logo_two.svg";
 
 
 const Navbar = () => {
@@ -13,56 +12,74 @@ const Navbar = () => {
   const isLoggedIn = auth.status === "loggedIn";
 
   return (
-      <div>
-        <div className='w-full px-4 lg:px-10 xl:px-16 py-4 flex items-center'>
-
-            <img src={logoOne} alt='My Logo' className="h-15 w-auto mr-3" />
-
+      <div className="w-full">
+        <div className='flex items-center w-full py-4 mx-auto max-w-7xl'>
+          {/* LOGO */}
+          <Link to="/" className='flex items-center mr-4'>
+            <img src={LogoTwo} alt="Logo" className='w-auto sm:h-6 md:h-7 lg:h-9 xl:h-12'/>
+          </Link>
+          
+          {/* DESKTOP NAV-Links */}
+          <div className='w-full'>
             <nav id='navbarCollapse'
-              className={`${open ? "block" : "hidden"} lg:flex items-center space-x-6 flex-grow sm:hidden`}
+              className={`${open ? "block" : "hidden"} lg:flex justify-between w-full sm:hidden`}
             >
-              <ListItem NavLink='/elearning'>E-Learning</ListItem>
-              <ListItem NavLink='/#'>Blog</ListItem>
-              <ListItem NavLink='/#'>About</ListItem>
-              <div className='flex-grow'></div> 
-              
-              <div className='hidden lg:flex items-center space-x-6 justify-end'>
-                <ListItem NavLink='/#'>Contact</ListItem>
+              {/* left nav links */}
+              <div className='items-center hidden gap-4 lg:flex'>
+                <Link to='/elearning' className='link-nav'>E-Learning</Link>
+                <Link to='/blog' className='link-nav'>Blog</Link>
+                <Link to='/about' className='link-nav'>About</Link>
+              </div>
+
+              {/* right nav links */}
+              <div className='items-center hidden gap-4 lg:flex'>
+                <Link to='/contact' className='link-nav'>Contact</Link>
 
                 {isLoggedIn && (
-                  <ListItem NavLink='/dashboard'>Dashboard</ListItem>
+                  <Link to='/dashboard' className='link-nav'>Dashboard</Link>
                 )}
 
                 {isLoggedIn ? ( <LogOut isVisible={true} /> ) : (
                   <>
-                  <ListItem NavLink='/login'>Login</ListItem>
-                    <Link to='/signup' className='btn-nav block mt-2 lg:mt-0 lg:inline-block'>Sign up</Link>
+                  <Link to='/login' className='link-nav'>Login</Link>
+                    <Link to='/signup' className='btn-nav'>Sign up</Link>
                   </>
                 )}            
               </div>
             </nav>
+          </div>
+            
+          {/* MOBILE toggle button */}  
           <button
             type='button'
             aria-label='Toggle-menu'
             onClick={() => setOpen(!open)}
-            className='lg:hidden flex flex-col space-y-1 ml-auto'
+            className='flex flex-col ml-auto space-y-1 lg:hidden'
           >
             <span className='w-6 h-0.5 bg-[#6DAE81]'></span>
             <span className='w-6 h-0.5 bg-[#6DAE81]'></span>
             <span className='w-6 h-0.5 bg-[#6DAE81]'></span>
           </button> 
         </div>
-
+        {/* MOBILE NAV links */}  
         {open && (
-          <div className='lg:hidden px-4 pb-4 space-y-2 bg-[#fdfdfd]'>
-            <ListItem NavLink='/#'>E-Learning</ListItem>
-            <ListItem NavLink='/#'>Blog</ListItem>
-            <ListItem NavLink='/#'>About</ListItem>
+          <div className='pb-4 space-y-2 lg:hidden'>
+            <Link to='/elearning' className='link-nav'>E-Learning</Link>
+            <Link to='/blog' className='link-nav'>Blog</Link>
+            <Link to='/about' className='link-nav'>About</Link>
             
-            <ListItem NavLink='/#'>Contact</ListItem>
-            <ListItem NavLink='/login'>Login</ListItem>
-            
-            <Link to='/signup' className='btn-nav block'>Sign up</Link>
+            <Link to='/contact' className='link-nav'>Contact</Link>
+
+            {isLoggedIn && (
+              <Link to='/dashboard' className='link-nav'>Dashboard</Link>
+            )}
+
+            {isLoggedIn ? ( <LogOut isVisible={true} /> ) : (
+              <>
+                <Link to='/login' className='link-nav'>Login</Link>
+                <Link to='/signup' className='btn-nav'>Sign up</Link>
+              </>
+            )}       
           </div>
         )}
 
@@ -72,11 +89,3 @@ const Navbar = () => {
 };
 
 export default Navbar
-
-const ListItem = ({ children, NavLink }: ListItemProps) => {
-  return (
-     <Link to={NavLink} className='link-nav block px-2 py-1 hover:text-[#6DAE81] lg:inline-block'>
-        {children}
-    </Link>
-  );
-};

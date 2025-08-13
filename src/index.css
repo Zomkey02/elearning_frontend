@@ -21,49 +21,66 @@
   font-style: normal;
 }
 
+@theme {
+
+  --font-manrope: "Manrope", "sans-serif";
+
+  --color-primary: #6DAE81;      
+  --color-primary_lighter: #A7DCA5; 
+  --color-light: #FDFDFD;    
+  --color-accent: #FFE6C7;          
+  --color-danger: #EF476F;             
+  --color-dark: #444444;
+}
+
 @layer base {
   html {
     @apply text-base leading-relaxed;
   }
   body {
-    @apply bg-[#fdfdfd] text-black font-sans;
+    @apply bg-light font-manrope text-dark;
   }
   h1 {
-    @apply font-bold text-4xl leading-tight text-gray-900;
+    @apply font-bold text-4xl leading-tight text-dark;
   }
-
   h2 {
-    @apply font-semibold text-3xl leading-snug text-gray-800;
+    @apply font-semibold text-3xl font-manrope leading-snug text-dark;
   }
   h3 {
-    @apply font-semibold text-3xl leading-snug text-gray-800;
+    @apply font-semibold text-2xl font-manrope leading-snug text-dark;
   }
-
   p {
-    @apply font-normal text-base leading-relaxed text-gray-700;
+    @apply font-normal text-base font-manrope leading-relaxed text-dark;
   }
-
   a {
-    @apply text-[#6DAE81] hover:text-[#5b986f] transition;
+    @apply font-normal font-manrope text-primary hover:text-[#5b986f] transition;
   }
 }
 
 @layer components {
   /* Custom Link Styles */
   .link-nav {
-    @apply px-2 py-1 text-[#6DAE81] font-semibold hover:text-[#5b986f]
+    @apply block lg:inline-block font-semibold text-primary hover:text-[#5b986f]
   }
   /* Custom button sytles*/
   .btn-hero{
-    @apply bg-[#6DAE81] text-white px-6 py-3 font-semibold text-3xl rounded-lg hover:bg-[#5b986f] transition;
+    @apply bg-primary text-light px-6 py-3 font-semibold text-3xl rounded-lg hover:bg-[#5b986f] transition;
   }
 
   .btn-primary {
     @apply bg-[#6DAE81] text-white px-6 py-2 rounded-lg hover:bg-[#5b986f] transition;
   }
+
+  .btn-secondary {
+    @apply bg-[#6DAE81] text-white px-4 py-2 rounded-lg text-sm hover:bg-[#5b986f] transition;
+  }
+
+  .btn-tertiary {
+    @apply bg-[#6DAE81] text-white px-4 py-2 rounded-lg text-sm hover:bg-[#5b986f] transition;
+  }
   
   .btn-nav {
-    @apply bg-[#6DAE81] text-white px-5 py-1 rounded-lg font-semibold hover:shadow-md transition;
+    @apply bg-primary text-white px-3 py-1 rounded-lg font-semibold hover:shadow-md transition;
   }
 
   .btn-edit {

@@ -25,7 +25,7 @@ const LogOut = ({ isVisible }: Props) => {
       };
   
     return isVisible ? (
-        <button className="btn-nav border-2 border-[#6DAE81] bg-[#FDFDFD] text-black" onClick={handleLogout}>
+        <button className="border-2 btn-nav text-dark border-primary bg-light hover:bg-primary hover:text-light" onClick={handleLogout}>
           Log Out
         </button>
     ): null; 

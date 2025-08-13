@@ -32,7 +32,7 @@ const Home = () => {
           Learn the basics at your own pace with simple explanations, real-life examples,
           and a space that helps you grow financially, one step at a time.
         </p>
-        <Link to="/e-learning">
+        <Link to="/elearning">
           <button className='btn-hero'>
             Get started
           </button>
@@ -47,11 +47,11 @@ const Home = () => {
       </section>
 
       {/* Numbering Section*/}
-      <section className="py-20 px-6 bg-[#f8f8f8]">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-12 items-start justify-center">
+      <section className='py-20 px-6 bg-[#FFE6C7]'>
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-12  items-center justify-center">
           {/* LEFT TITLE */}
           <div className='md:w-1/2 text-center md:text-left'>
-            <h2 className='text-2xl md:text-4xl font-bold'>
+            <h2 className='text-2xl md:text-4xl xl:text-6xl font-bold'>
               It’s about time you had a place to learn investing that actually makes sense and feels like it’s made for you.
             </h2>
           </div>
@@ -60,7 +60,7 @@ const Home = () => {
           <div className="md:w-1/2 space-y-8">
             {/* Feature 1 */}
             <div className="flex items-start">
-              <div className="text-3xl font-bold text-[#6DAE81] w-10 shrink-0">1</div>
+              <div className="xl:text-7xl md:text-8xl sm:text-7xl font-semibold text-[#6DAE81] w-10 shrink-0">1</div>
               <div className="ml-4">
                 <h3 className="text-lg font-semibold">Made to Feel Like Home</h3>
                 <p className="text-gray-700">
@@ -70,7 +70,7 @@ const Home = () => {
             </div>
             {/* Feature 2 */}
             <div className="flex items-start">
-              <div className="text-3xl font-bold text-[#6DAE81] w-10 shrink-0">2</div>
+              <div className="text-3xl xl:text-7xl md:text-8xl sm:text-7xl font-semibold text-[#6DAE81] w-10 shrink-0">2</div>
               <div className="ml-4">
                 <h3 className="text-lg font-semibold">No Finance Degree Required</h3>
                 <p className="text-gray-700">
@@ -80,7 +80,7 @@ const Home = () => {
             </div>
             {/* Feature 3 */}
             <div className="flex items-start">
-              <div className="text-3xl font-bold text-[#6DAE81] w-10 shrink-0">3</div>
+              <div className="text-3xl xl:text-7xl md:text-8xl sm:text-7xl font-semibold text-[#6DAE81] w-10 shrink-0">3</div>
               <div className="ml-4">
                 <h3 className="text-lg font-semibold">Learn Your Way, On Your Time</h3>
                 <p className="text-gray-700">
@@ -90,7 +90,7 @@ const Home = () => {
             </div>
             {/* Feature 4 */}
             <div className="flex items-start">
-              <div className="text-3xl font-bold text-[#6DAE81] w-10 shrink-0">4</div>
+              <div className="text-3xl xl:text-7xl md:text-8xl sm:text-7xl font-semibold text-[#6DAE81] w-10 shrink-0">4</div>
               <div className="ml-4">
                 <h3 className="text-lg font-semibold">Built for Real Life</h3>
                 <p className="text-gray-700">
@@ -105,8 +105,8 @@ const Home = () => {
       {/* Blog Section */}
       <section className="py-16 bg-white">
       {/* Section Title */}
-      <h2 className="text-2xl md:text-4xl font-bold text-center mb-12">
-        But it's more than just E-Learning, stay updated with the economy
+      <h2 className="text-2xl md:text-4xl text-center mb-12">
+        But it's more than just E-Learning, stay updated with current Finance News!
       </h2>
 
       {/* Featured News Box */}
@@ -115,11 +115,11 @@ const Home = () => {
         <div className="w-full md:w-1/3 h-64 bg-gray-300" />
 
         {/* Text Box */}
-        <div className="w-full md:w-2/3 bg-[#6DAE81] text-white p-6 flex items-center">
+        <div className="w-full md:w-2/3 bg-[#6DAE81] p-6 flex items-center">
           <div>
-            <h3 className="text-xl font-semibold mb-2">Blog Title Placeholder</h3>
-            <p className="mb-4">A short subtitle or excerpt from the article goes here. This will be dynamic content later.</p>
-            <a href="#" className="underline hover:text-gray-100 transition">
+            <h3 className="text-xl text-white font-semibold mb-2">Blog Title Placeholder</h3>
+            <p className="mb-4 text-white">A short subtitle or excerpt from the article goes here. This will be dynamic content later.</p>
+            <a href='/blog' className="text-white hover:font-semibold transition">
               Read more →
             </a>
           </div>
@@ -143,9 +143,9 @@ const Home = () => {
           Proof that learning can be simple and fun
         </h2>
 
-        <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
+        <div className='flex overflow-x-auto space-x-6 px-4'>
           {/* Card 1 */}
-          <div className='bg-[#F7D6D6] p-6 rounded-lg shadow-md'>
+          <div className='max-w-[300px] bg-[#FFE6C7] p-6 rounded-lg shadow-md flex-shrink-0'>
             <div className='text-sm font-semibold'> Marie, 22</div>
             <h3 className='text-lg font-semibold mt-2'>
               Keys to writing copy that actually converts and sells users
@@ -156,7 +156,7 @@ const Home = () => {
           </div>
 
           {/* Card 2 */}
-          <div className='bg-[#F7D6D6] p-6 rounded-lg shadow-md'>
+          <div className='max-w-[300px] bg-[#FFE6C7] p-6 rounded-lg shadow-md flex-shrink-0'>
             <div className='text-sm font-semibold'> Marie, 22</div>
             <h3 className='text-lg font-semibold mt-2'>
               Keys to writing copy that actually converts and sells users
@@ -167,7 +167,7 @@ const Home = () => {
           </div>
 
           {/* Card 3 */}
-          <div className='bg-[#F7D6D6] p-6 rounded-lg shadow-md'>
+          <div className='max-w-[300px] bg-[#FFE6C7] p-6 rounded-lg shadow-md flex-shrink-0'>
             <div className='text-sm font-semibold'> Marie, 22</div>
             <h3 className='text-lg font-semibold mt-2'>
               Keys to writing copy that actually converts and sells users
@@ -179,7 +179,7 @@ const Home = () => {
           </div>
 
           {/* Card 4 */}
-          <div className='bg-[#F7D6D6] p-6 rounded-lg shadow-md'>
+          <div className='max-w-[300px] bg-[#FFE6C7] p-6 rounded-lg shadow-md flex-shrink-0'>
             <div className='text-sm font-semibold'> Marie, 22</div>
             <h3 className='text-lg font-semibold mt-2'>
               Keys to writing copy that actually converts and sells users
@@ -188,9 +188,8 @@ const Home = () => {
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore...
             </p>
           </div>
-
           {/* Card 5 */}
-          <div className='bg-[#F7D6D6] p-6 rounded-lg shadow-md'>
+          <div className='max-w-[300px] bg-[#FFE6C7] p-6 rounded-lg shadow-md flex-shrink-0'>
             <div className='text-sm font-semibold'> Marie, 22</div>
             <h3 className='text-lg font-semibold mt-2'>
               Keys to writing copy that actually converts and sells users
