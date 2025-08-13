@@ -1,11 +1,16 @@
 import React, { useContext, useState } from 'react'
 import { AuthContext } from '../context/AuthProvider'
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import ProfileFormUpdate from './ProfileFormUpdate';
+import http from '../utils/http';
 
 const DashboardProfileCard = () => {
     const {auth, setAuth} = useContext(AuthContext);
     const [editing, setEditing] = useState(false);
+    const [confirmDelete, setConfirmDelete] = useState(false);
+    const [deletePassword, setDeletePassword] = useState('');
+    const navigate = useNavigate();
 
     if (!auth?.data) return null;
 
@@ -22,6 +27,28 @@ const DashboardProfileCard = () => {
             status: 'loggedIn',
         });
         setEditing(false);
+    };
+
+    const handleDeleteUser = async () => {
+        if (!deletePassword.trim()) {
+            alert('Please enter your current password.');
+            return;
+        }
+
+        if(!confirm('Are you sure you want to delete you Account. The account cannot be recovered afterwards.')) return;
+
+        try {
+            await http.get('/sanctum/csrf-cookie');
+            await http.delete('/api/delete', {
+                data: {password: deletePassword },
+            });
+
+            setAuth({ data: null, status: 'loggedOut'});
+            navigate('/login');
+        } catch (error) {
+            console.error('Error deleting user:', error);
+            alert('Account deletion failed, please check your password and try again.');
+        }
     };
 
   return (
@@ -58,7 +85,24 @@ const DashboardProfileCard = () => {
                     <button className='btn-primary' onClick={() => setEditing(true)}>
                         Edit Profile
                     </button>
-                    <button className='btn-primary'>Delete User</button>
+
+                    {!confirmDelete ? (
+                        <button className='btn-primary' onClick={() => setConfirmDelete(true)}>Delete User</button>
+                    ): (
+                        <div className='flex items-center gap-2'>
+                            <input 
+                                type="password"
+                                placeholder='Enter current password'
+                                value={deletePassword}
+                                onChange={(e) => setDeletePassword(e.target.value)}
+                                className='w-full px-3 py-2 border border-gray-300 rounded'
+                            />
+                            <div className='flex gap-2'>
+                                <button className='btn-primary' onClick={() => {setConfirmDelete(false); setDeletePassword('');}}>Cancel</button>
+                                <button className='btn-primary' onClick={handleDeleteUser}>Confirm Delete</button>
+                            </div>
+                        </div>
+                    )}
                 </div>
             </>
         ) : (
