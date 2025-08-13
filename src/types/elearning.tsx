@@ -6,6 +6,19 @@ export type Course = {
   duration?: string;
   thumbnail?: string | null;
   lessons?: Lesson[];
+  category?: 'investing-basics' | 'passive-investing-strategies' | 'personal-finance';
+};
+
+export type CourseFormValues = {
+    title: string;
+    slug: string;
+    summary: string;
+    thumbnail: FileList;
+    description: string;
+    duration: number;
+    status: 'draft' | 'published';
+    thumbnailUrl: string;
+    category: 'investing-basics' | 'passive-investing-strategies' | 'personal-finance';
 };
 
 export type Lesson = {
@@ -35,13 +48,3 @@ export type LessonFormValues = {
     thumbnailUrl?: string;
 }
 
-export type CourseFormValues = {
-    title: string;
-    slug: string;
-    summary: string;
-    thumbnail: FileList;
-    description: string;
-    duration: number;
-    status: 'draft' | 'published';
-    thumbnailUrl: string;
-};

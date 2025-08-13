@@ -74,6 +74,18 @@ const CourseForm: React.FC<CourseFormProps> = ({ onSubmit, defaultValues, mode }
         </div>
 
         <div>
+          <select 
+            {...register('category', { required: 'Category is required' })} 
+            className='w-full p-4 bg-gray-200 h-14 rounded-xl'
+          >
+              <option value='investing-basics'>Investing Basics</option>
+              <option value='passive-investing-strategies'>Passive Investing Strategies</option>
+              <option value='personal-finance'>Personal Finance</option>
+          </select>
+          {errors.category && <p className='text-red-500'>{errors.category.message}</p>}
+        </div>
+
+        <div>
           <input 
             {...register('summary', { required: 'Summary is required' })} 
             placeholder='Summary' 

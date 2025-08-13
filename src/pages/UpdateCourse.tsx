@@ -31,6 +31,7 @@ const UpdateCourse = () => {
           title: course.title || '',
           slug: course.slug || '',
           summary: course.summary || '',
+          category: course.category || '',
           thumbnail: [] as unknown as FileList,
           description: course.description || '',
           duration: course.duration || '',
@@ -57,6 +58,7 @@ const UpdateCourse = () => {
       courseFormData.append('description', data.description);
       courseFormData.append('duration', String(data.duration));
       courseFormData.append('status', data.status);
+      courseFormData.append('category', data.category);
 
       await http.post(`/api/course/update/${courseId}`, courseFormData);
 

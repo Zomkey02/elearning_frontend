@@ -32,6 +32,7 @@ const CreateCourse = () => {
       courseFormData.append('description', data.description);
       courseFormData.append('duration', String(data.duration));
       courseFormData.append('status', data.status);
+      courseFormData.append('category', data.category);
 
       await http.post('/api/course', courseFormData);
 
