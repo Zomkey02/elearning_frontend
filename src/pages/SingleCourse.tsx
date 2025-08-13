@@ -1,11 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import http from '../utils/http'
 import LessonCard from '../components/LessonCard'
 import { getThumbnailUrl } from '../utils/getThumbnailUrl'
 import type {Course, Lesson} from '../types/elearning'
-import { AuthContext } from '../context/AuthProvider'
 import SafeHTML from '../components/SafeHTML'
+import { useAuth } from '../hooks/useAuth'
 
 /* interface Lesson {
     id: number
@@ -30,8 +30,9 @@ const SingleCourse: React.FC = () => {
     const [course, setCourse] = useState<Course | null>(null)  
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)
-    const {auth} = useContext(AuthContext);
-    const isAdmin = auth?.data?.role === 'admin';
+/*     const {auth} = useContext(AuthContext);
+    const isAdmin = auth?.data?.role === 'admin'; */
+    const {isAdmin} = useAuth();
 
     useEffect(() => {
         const fetchCourse = async () => {

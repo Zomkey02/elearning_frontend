@@ -1,7 +1,7 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
-import { AuthContext } from '../context/AuthProvider'
 import type { Lesson } from '../types/elearning'
+import { useAuth } from '../hooks/useAuth'
 
 type LessonCardProps = {
     courseId: string 
@@ -12,8 +12,9 @@ type LessonCardProps = {
 
 
 const LessonCard: React.FC<LessonCardProps> = ({courseId, lesson, onDelete}) => {
-  const { auth } = useContext(AuthContext);
-  const isAdmin = auth?.data?.role === 'admin';
+/*   const { auth } = useContext(AuthContext);
+  const isAdmin = auth?.data?.role === 'admin'; */
+  const {isAdmin} = useAuth();
 
   return (
     <div className='p-4 mt-6 mb-6 transition border rounded-lg shadow-md cursor-pointer hover:shadow-lg'>

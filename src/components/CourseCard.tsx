@@ -1,8 +1,8 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom';
-import { AuthContext } from '../context/AuthProvider';
 import { getThumbnailUrl } from '../utils/getThumbnailUrl';
 import type { Course } from '../types/elearning';
+import { useAuth } from "../hooks/useAuth";
 
 interface CourseCardProps {
     /* course: Pick<Course, 'id' | 'title' | 'summary' | 'duration' | 'thumbnail'>; */
@@ -11,8 +11,9 @@ interface CourseCardProps {
 }
 
 const CourseCard:React.FC<CourseCardProps> = ({ course, onDelete }) => {
-    const {auth} = useContext(AuthContext);
-    const isAdmin = auth?.data?.role === 'admin';
+/*     const {auth} = useContext(AuthContext); */
+    const {isAdmin} = useAuth();
+/*     const isAdmin = auth?.data?.role === 'admin'; */
     const thumbnailUrl = getThumbnailUrl(course.thumbnail ?? null);
 
   return (
@@ -44,11 +45,12 @@ const CourseCard:React.FC<CourseCardProps> = ({ course, onDelete }) => {
         {isAdmin && onDelete && (
             <div className='flex justify-end gap-2 p-4'>
                 <Link to={`/course/update/${course.id}`}>
-                    <button className=' btn-edit'>Edit</button>
+                    <button className=' btn-edit' type='button'>Edit</button>
                 </Link>
                 <button 
                     onClick={onDelete}
                     className='btn-delete'
+                    type='button'
                 >
                     Delete
                 </button>

@@ -1,12 +1,12 @@
-import React, { useContext }  from 'react'
+import React  from 'react'
 import { useNavigate } from 'react-router-dom'
 import AuthForm from '../components/AuthForm'
-import { AuthContext } from '../context/AuthProvider'
 import http from '../utils/http'
+import { useAuth } from '../hooks/useAuth'
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
-  const { setAuth } = useContext(AuthContext);
+  const { setAuth } = useAuth();
 
 
   const handleLoginSuccess = async () => {

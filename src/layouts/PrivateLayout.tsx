@@ -1,13 +1,15 @@
-import React, { useContext } from 'react'
-import { AuthContext } from '../context/AuthProvider'
 import { useLocation, Navigate, Outlet } from 'react-router-dom';
+import { useAuth } from '../hooks/useAuth';
 
 const PrivateLayout = () => {
-    const { auth } = useContext(AuthContext);
-    const location = useLocation();
+    /* const { auth } = useContext(AuthContext); */
+  const { isLoading, isLoggedIn} = useAuth();
+  const location = useLocation();
+
+  if (isLoading) return '...Loading';
 
 
-  return auth.status === 'loading' ? '...Loading' : auth.status === 'loggedIn' ? (
+  return isLoggedIn ? (
     <Outlet />
   ) : (
     <>

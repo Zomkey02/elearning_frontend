@@ -1,20 +1,18 @@
-import React, { useContext, useState } from 'react'
-import { AuthContext } from '../context/AuthProvider'
-import { Link } from 'react-router-dom';
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import ProfileFormUpdate from './ProfileFormUpdate';
 import http from '../utils/http';
+import { useAuth } from '../hooks/useAuth';
 
 const DashboardProfileCard = () => {
-    const {auth, setAuth} = useContext(AuthContext);
+    const {user, isLoading, setAuth} = useAuth();
     const [editing, setEditing] = useState(false);
     const [confirmDelete, setConfirmDelete] = useState(false);
     const [deletePassword, setDeletePassword] = useState('');
     const navigate = useNavigate();
 
-    if (!auth?.data) return null;
-
-    const user = auth.data;
+    if (isLoading) return <div className='text-sm'>Loading Profile Info</div>
+    if (!user) return null;
 
     const handleUpdateSuccess = (updatedUser: {id: number; username: string; email: string}) => {
         setAuth({
@@ -69,7 +67,7 @@ const DashboardProfileCard = () => {
                     </div>
                     <div>
                         <p className='font-semibold text-black'>Username</p>
-                        <p className='text-green-600'> { auth.data.username } </p>
+                        <p className='text-green-600'> { user.username } </p>
                     </div>
                 </div>
 
@@ -78,7 +76,7 @@ const DashboardProfileCard = () => {
                     </div>
                     <div>
                         <p className='font-semibold text-black'>Email</p>
-                        <p className='text-green-600'> { auth.data.email } </p>
+                        <p className='text-green-600'> { user.email } </p>
                     </div>
                 </div>
                 <div className='flex gap-3'>
@@ -109,8 +107,8 @@ const DashboardProfileCard = () => {
             <>
                 <ProfileFormUpdate
                     defaultValues={{ 
-                        username: auth.data.username,
-                        email: auth.data.email,
+                        username: user.username,
+                        email: user.email,
                     }}
                     onSuccess={handleUpdateSuccess}
                     className='w-full p-0 bg-transparent shadow-none'
