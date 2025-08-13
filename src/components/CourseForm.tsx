@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react'
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import slugify from 'slugify';
 import type { CourseFormValues } from '../types/elearning';
+import Tiptap from '../Tiptap';
 
 /* type CourseFormValues = {
   title: string;
@@ -28,6 +29,7 @@ const CourseForm: React.FC<CourseFormProps> = ({ onSubmit, defaultValues, mode }
     reset,
     watch,
     setValue,
+    control,
     formState: { errors, isSubmitting },
   } = useForm<CourseFormValues> ({ defaultValues });
   
@@ -104,13 +106,30 @@ const CourseForm: React.FC<CourseFormProps> = ({ onSubmit, defaultValues, mode }
           {errors.thumbnail && <p className='mt-1 text-sm text-red-500'>{errors.thumbnail.message}</p>}
         </div>
 
-        <div>
+{/*         <div>
           <textarea 
             {...register('description', { required: 'Description is required' })} 
             placeholder='Description' 
             className='w-full min-h-[144px] p-4 bg-gray-200 rounded-xl text-base font-normal resize-none focus:outline-none focus:ring-0'>  
           </textarea>
           {errors.description && <p className='text-red-500'>{errors.description.message}</p>}
+        </div> */}
+        <div>
+          <Controller 
+            name='description'
+            control={control}
+            rules={{ required: 'Description is required' }}
+            render={({field}) => (
+              <>
+                <Tiptap 
+                  value={field.value || ''} 
+                  onChange={field.onChange} 
+                  placeholder='Write your description' 
+                />
+                {errors.description && <p className='text-red-500'>{errors.description.message}</p>}
+              </>
+            )}
+          />
         </div>
 
         <div>
