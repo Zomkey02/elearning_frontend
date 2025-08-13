@@ -2,11 +2,16 @@ import React, { useEffect, useState } from 'react'
 import CourseCard from '../components/CourseCard'
 import http from '../utils/http'
 import type {Course} from '../types/elearning'
+import { Link } from 'react-router-dom';
+
+import { useAuth } from "../hooks/useAuth";
 
 type CourseResponse = { courses: Course[] };
 
 const ELearning: React.FC = () => {
   const [courses, setCourses] = useState<Course[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<string>('investing-basics');
+  const {isAdmin} = useAuth();
 
   useEffect(() => {
     const fetchCourses = async () => {
@@ -28,27 +33,48 @@ const ELearning: React.FC = () => {
       console.error('Failed to delete course:', error);
     }
   };
+
+  const categories = [
+    { label: 'Investing Basics', value: 'investing-basics' },
+    { label: 'Passive Investing', value: 'passive-investing-strategies' },
+    { label: 'Personal Finance', value: 'personal-finance' }
+  ];
+
+  const filteredCourses = courses.filter(course => course.category === selectedCategory);
   
   return (
     <div className='grid max-w-6xl place-items-center'>
-      <div className='w-full pl-4'>
-        <div className='flex mb-0 space-x-4'>
-          <button className='px-4 py-2 bg-white text-black font-semibold rounded-lg shadow-outer border-3 border-[#A7DCA5]'>
-            Investing
-          </button>
-          <button className='px-4 py-2 font-semibold text-black rounded-lg bg-primary'>
-            Personal Finance
-          </button>
-          <button className='px-4 py-2 font-semibold text-black rounded-lg bg-midnight'>
-            Lorem ipsum
-          </button>
-        </div>
-      </div>
-      <div className='bg-[#A7DCA5] rounded-xl shadow-lg p-6'>
+      <h1 className='mb-4 text-3xl font-bold'>E-Learning</h1>
+      <div className='flex items-center justify-between w-full'>
 
-        {/* Course Cards */}
+        <div className='flex mb-0 space-x-4'>
+          {categories.map(({label, value}) => (
+            <button 
+              key={value}
+              onClick={() => setSelectedCategory(value)}
+              className={`px-4 py-2 font-semibold border-2 border-transparent hover:border-primary_lighter active:border-primary_lighter rounded-tl-md rounded-tr-md ${
+              selectedCategory === value ? 'bg-primary_lighter shadow-lg' : ''
+            }`}
+            > 
+            {label}
+            </button>
+          ))}
+        </div>
+
+        {isAdmin && (
+          <div className='flex'>
+            <Link to='/course/create' className='px-4 py-2 border-2 border-transparent rounded text-primary hover:border-2 hover:border-primary'>
+              Create Course
+            </Link>
+          </div>
+        )}
+          
+      </div>
+      
+       {/* Course View */}
+      <div className='p-6 shadow-lg bg-primary_lighter rounded-bl-md rounded-br-md'>
         <div className='grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3'>
-          {courses.map((course) => (
+          {filteredCourses.map((course) => (
             <CourseCard
               key={course.id}
               course={course}
