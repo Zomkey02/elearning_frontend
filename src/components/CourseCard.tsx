@@ -28,7 +28,7 @@ const CourseCard:React.FC<CourseCardProps> = ({ course, onDelete }) => {
                 className="object-cover w-full h-48"
                 />
             ) : (
-            <div className='flex items-center justify-center w-full h-48 text-gray-600 bg-gray-300'>
+            <div className='flex items-center justify-center w-full h-48 bg-gray-300'>
                 No Image
             </div>
             )}

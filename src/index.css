@@ -41,7 +41,7 @@
     @apply bg-light font-manrope text-dark;
   }
   h1 {
-    @apply font-bold text-4xl leading-tight text-dark;
+    @apply font-bold text-5xl leading-tight text-dark;
   }
   h2 {
     @apply font-semibold text-3xl font-manrope leading-snug text-dark;

@@ -63,7 +63,7 @@ const SingleLesson: React.FC = () =>{
       <h1>{lesson.title}</h1>
       <div className='flex items-center'>
         {lesson.duration !== null && (
-          <p><strong>Duration:</strong> {lesson.duration} min</p>
+          <p className='mr-6'><strong>Duration:</strong> {lesson.duration} min</p>
         )}
         {lesson.level !== null && (
           <p><strong>Level:</strong> {lesson.level}</p>
