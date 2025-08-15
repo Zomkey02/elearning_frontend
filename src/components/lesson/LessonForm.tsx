@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react'
-import { useForm } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
 import slugify from 'slugify'
-import type { LessonFormValues } from '../types/elearning'
+import type { LessonFormValues } from '../../types/elearning'
+import Tiptap from '../../Tiptap'
 
 type LessonFormProps = {
     onSubmit: (data: LessonFormValues) => void;
@@ -18,6 +19,7 @@ const LessonForm: React.FC<LessonFormProps> = ({ onSubmit, defaultValues, mode, 
         reset,
         watch,
         setValue,
+        control,
         formState: { errors, isSubmitting },
     } = useForm<LessonFormValues>({ defaultValues })
 
@@ -43,7 +45,7 @@ const LessonForm: React.FC<LessonFormProps> = ({ onSubmit, defaultValues, mode, 
 
 
 return (
-    <form onSubmit={handleSubmit(onSubmit)} className='w-full max-w-3xl mx-auto space-y-4'>
+    <form onSubmit={handleSubmit(onSubmit)} className='w-full max-w-xl mx-auto space-y-4'>
         <h2 className='text-2xl font-bold text-center'>
             {mode === 'create' ? 'Create a new lesson' : 'Update a lesson'}
         </h2>
@@ -115,13 +117,31 @@ return (
         </div>
 
 
-        <div>
+{/*         <div>
             <textarea
               {...register('content', { required: 'Content is required' })}
               placeholder='Content'
               className='w-full min-h-[144px] p-4 bg-gray-200 rounded-xl text-base font-normal resize-none focus:outline-none focus:ring-0'
             />
             {errors.content && <p className='text-red-500'>{errors.content.message}</p>}
+        </div> */}
+
+        <div>
+          <Controller 
+            name='content'
+            control={control}
+            rules={{ required: 'Content is required' }}
+            render={({field}) => (
+              <>
+                <Tiptap 
+                  value={field.value || ''} 
+                  onChange={field.onChange} 
+                  placeholder='Write your content' 
+                />
+                {errors.content && <p className='text-red-500'>{errors.content.message}</p>}
+              </>
+            )}
+          />
         </div>
 
         <div>
