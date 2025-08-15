@@ -1,8 +1,8 @@
 import { 
-    createBrowserRouter, // creates a router for a browser application
-    createRoutesFromElements, Form, // creates routes from a set of route elements
-    RouterProvider, // provides the router to the application
-    Route, // a single route
+    createBrowserRouter, 
+    createRoutesFromElements, 
+    RouterProvider, 
+    Route, 
 } from 'react-router-dom'
 
 import RootLayout from './layouts/RootLayout'
@@ -14,13 +14,15 @@ import SignUp from './pages/SignUp'
 import Dashboard from './pages/Dashboard'
 import ELearning from './pages/ELearning'
 
-import CreateCourse from './pages/CreateCourse'
-import UpdateCourse from './pages/UpdateCourse'
-import CreateLesson from './pages/CreateLesson'
-import SingleCourse from './pages/SingleCourse'
-import SingleLesson from './pages/SingleLesson'
-import UpdateLesson from './pages/UpdateLesson'
-import Blog from './pages/Blog'
+import SingleCourse from './pages/course/SingleCourse'
+import CreateCourse from './pages/course/CreateCourse'
+import UpdateCourse from './pages/course/UpdateCourse'
+
+import SingleLesson from './pages/lessons/SingleLesson'
+import CreateLesson from './pages/lessons/CreateLesson'
+import UpdateLesson from './pages/lessons/UpdateLesson'
+
+import Blog from './pages/blog/Blog'
 import About from './pages/About'
 import Contact from './pages/Contact'
 

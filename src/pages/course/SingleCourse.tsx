@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import http from '../utils/http'
-import LessonCard from '../components/LessonCard'
-import { getThumbnailUrl } from '../utils/getThumbnailUrl'
-import type {Course, Lesson} from '../types/elearning'
-import SafeHTML from '../components/SafeHTML'
-import { useAuth } from '../hooks/useAuth'
+import http from '../../utils/http'
+import LessonCard from '../../components/lesson/LessonCard'
+import { getThumbnailUrl } from '../../utils/getThumbnailUrl'
+import type {Course, Lesson} from '../../types/elearning'
+import SafeHTML from '../../components/SafeHTML'
+import { useAuth } from '../../hooks/useAuth'
 
 /* interface Lesson {
     id: number

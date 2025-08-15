@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import type { Lesson } from '../types/elearning'
-import { useAuth } from '../hooks/useAuth'
+import type { Lesson } from '../../types/elearning'
+import { useAuth } from '../../hooks/useAuth'
 
 type LessonCardProps = {
     courseId: string 

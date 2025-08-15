@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form';
-import http from '../utils/http';
+import http from '../../utils/http';
 
 type ProfileFormUpdateValues = {
     username: string;

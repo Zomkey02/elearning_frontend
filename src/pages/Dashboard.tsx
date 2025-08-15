@@ -1,6 +1,6 @@
 import React from 'react'
-import DashboardProfileCard from '../components/DashboardProfileCard';
-import DashboardAdminFunctions from '../components/DashboardAdminFunctions';
+import DashboardProfileCard from '../components/dashboard/DashboardProfileCard';
+import DashboardAdminFunctions from '../components/dashboard/DashboardAdminFunctions';
 import { useAuth } from '../hooks/useAuth';
 
 const Dashboard: React.FC = () => {

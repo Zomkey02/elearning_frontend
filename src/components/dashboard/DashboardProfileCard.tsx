@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import ProfileFormUpdate from './ProfileFormUpdate';
-import http from '../utils/http';
-import { useAuth } from '../hooks/useAuth';
+import http from '../../utils/http';
+import { useAuth } from '../../hooks/useAuth';
 
 const DashboardProfileCard = () => {
     const {user, isLoading, setAuth} = useAuth();

@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import CourseForm from '../components/course/CourseForm';
+import CourseForm from '../../components/course/CourseForm';
 import { useForm } from 'react-hook-form';
-import http from '../utils/http';
-import type { CourseFormValues } from '../types/elearning';
+import http from '../../utils/http';
+import type { CourseFormValues } from '../../types/elearning';
 
 
 interface ErrorResponse {

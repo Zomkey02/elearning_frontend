@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import http from '../utils/http';
-import { getThumbnailUrl } from '../utils/getThumbnailUrl';
-import type { Lesson } from '../types/elearning';
+import http from '../../utils/http';
+import { getThumbnailUrl } from '../../utils/getThumbnailUrl';
+import type { Lesson } from '../../types/elearning';
 
 
 /* interface SingleLesson {
