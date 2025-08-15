@@ -1,5 +1,5 @@
 export type AuthFormData = {
-  username?: string; // Name field is optional for login
+  username?: string;
   email: string;
   password: string;
   password_confirmation: string;
