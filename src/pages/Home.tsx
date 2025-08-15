@@ -5,7 +5,7 @@ import LogoThree from '../assets/logos/logo_three.svg'
 const Home = () => {
   return (
      <div className="w-full">
-      {/* Hero Section */}
+      {/* Hero Section */}      
       <section className="relative h-[70vh] flex items-center justify-center">
         {/* Logo Image */}
         <div className="absolute flex items-center justify-center">

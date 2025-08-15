@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import {useForm} from 'react-hook-form'
 //import {DevTool} from '@hookform/devtools'
 import type { AuthFormData, AuthFormProps } from '../types/Types'
 import http from '../utils/http';
+
+import { IconContext } from "react-icons";
+import { RiEyeLine, RiEyeOffLine  } from "react-icons/ri";
 
 const AuthForm: React.FC<AuthFormProps> = ({
   legend,
@@ -13,6 +16,9 @@ const AuthForm: React.FC<AuthFormProps> = ({
   includeUsername = false,
   includePasswordConfirmation = false,
 }) => { 
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [showPasswordConfirm, setShowPasswordConfirm] = useState(false); 
 
   const {
     register,
@@ -64,14 +70,14 @@ const AuthForm: React.FC<AuthFormProps> = ({
             </div>
           )}
 
-          <div className="mb-4">
-            <label htmlFor="email" className="block mb-2 text-sm font-semibold text-gray-700">
+          <div className='mb-4'>
+            <label htmlFor='email' className='block mb-2 text-sm font-semibold text-gray-700'>
               Email
             </label>
             <input
-              type="email"
-              id="email"
-              className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+              type='email'
+              id='email"
+              className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500'
               {...register('email', {
                 required: 'Email is required',
                 pattern: {
@@ -85,52 +91,74 @@ const AuthForm: React.FC<AuthFormProps> = ({
             </div>
           </div>
 
-          <div className="mb-6">
-            <label htmlFor="password" className="block mb-2 text-sm font-semibold text-gray-700">
+          <div className='mb-6'>
+            <label htmlFor='password' className='block mb-2 text-sm font-semibold text-gray-700'>
               Password
             </label>
-            <input
-              autoComplete='off'
-              type="password"
-              id="password"
-              className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
-              {...register('password', {
-                required: 'Password is required',
-                minLength: {
-                  value: 8,
-                  message: 'Password must be at least 8 characters',
-                },
-                validate: (val) => {
-                  if (!/[A-Z]/.test(val)) return 'Password must include uppercase';
-                  if (!/[0-9]/.test(val)) return 'Password must include a number';
-                  if (!/[@$!%*?&]/.test(val)) return 'Password must include a symbol';
-                },
-              })}
-            />
+            <div className='relative'>
+              <input
+                autoComplete='off'
+                type={showPassword ? 'text' : 'password'} 
+                id='password'
+                className='w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500'
+                {...register('password', {
+                  required: 'Password is required',
+                  minLength: {
+                    value: 8,
+                    message: 'Password must be at least 8 characters',
+                  },
+                  validate: (val) => {
+                    if (!/[A-Z]/.test(val)) return 'Password must include uppercase';
+                    if (!/[0-9]/.test(val)) return 'Password must include a number';
+                    if (!/[@$!%*?&]/.test(val)) return 'Password must include a symbol';
+                  },
+                })}
+              />
+              <button 
+                aria-label='button'
+                type='button'
+                onClick={() => setShowPassword(!showPassword)} 
+                className='absolute inset-y-0 flex items-center right-3'>
+                  <IconContext.Provider value={{ size:'1.5em', color:'green'}}>
+                    {showPassword ? <RiEyeOffLine /> : <RiEyeLine />}
+                  </IconContext.Provider>
+              </button> 
+            </div>
             <div>
                 {errors.password && <div className='mt-1 text-sm text-red-500'>{errors.password.message}</div>}
             </div>
           </div>
           
           {includePasswordConfirmation && (
-            <div className="mb-6">
-              <label htmlFor="password_confirmation" className="block mb-2 text-sm font-semibold text-gray-700">
+            <div className='mb-6'>
+              <label htmlFor='password_confirmation' className='block mb-2 text-sm font-semibold'>
                 Confirm Password
               </label>
-              <input
-                autoComplete="off"
-                type="password"
-                id="password_confirmation"
-                className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
-                {...register('password_confirmation', {
-                  required: 'Please confirm your password',
-                  validate: (value) =>
-                    value === watch('password') || 'Passwords do not match',
-                })}
-              />
+              <div className='relative'>
+                <input
+                  autoComplete="off"
+                  type={showPasswordConfirm ? 'text' : 'password'} 
+                  id='password_confirmation'
+                  className='w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500'
+                  {...register('password_confirmation', {
+                    required: 'Please confirm your password',
+                    validate: (value) =>
+                      value === watch('password') || 'Passwords do not match',
+                  })}
+                />
+                <button 
+                  aria-label='Toggle button to see password'
+                  type='button'
+                  onClick={() => setShowPasswordConfirm(!showPasswordConfirm)} 
+                  className='absolute inset-y-0 flex items-center right-3'>
+                    <IconContext.Provider value={{ size:'1.5em', color:'green'}}>
+                      {showPasswordConfirm ? <RiEyeOffLine /> : <RiEyeLine />}
+                    </IconContext.Provider>
+                </button> 
+              </div>
               <div>
                 {errors.password_confirmation && (
-                  <div className="mt-1 text-sm text-red-500">{errors.password_confirmation.message}</div>
+                  <div className='mt-1 text-sm text-red-500'>{errors.password_confirmation.message}</div>
                 )}
               </div>
             </div>
@@ -138,8 +166,8 @@ const AuthForm: React.FC<AuthFormProps> = ({
           
           <button
             disabled={isSubmitting}
-            type="submit"
-            className="w-full bg-[#6DAE81] text-white font-semibold py-2 rounded hover:bg-green-700 transition"
+            type='submit'
+            className='w-full bg-[#6DAE81] text-white font-semibold py-2 rounded hover:bg-green-700 transition'
           >
             {buttonText}
           </button>
