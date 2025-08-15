@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import CourseCard from '../components/CourseCard'
+import CourseCard from '../components/course/CourseCard'
 import http from '../utils/http'
 import type {Course} from '../types/elearning'
 import { Link } from 'react-router-dom';
@@ -72,8 +72,9 @@ const ELearning: React.FC = () => {
       </div>
       
        {/* Course View */}
-      <div className='p-6 shadow-lg bg-primary_lighter rounded-bl-md rounded-br-md'>
-        <div className='grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3'>
+      <div className='p-6 shadow-lg bg-primary_lighter min-h-[400px] w-full flex items-center justify-center rounded-bl-md rounded-br-md'>
+        {filteredCourses.length > 0 ? (
+          <div className='grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3'>
           {filteredCourses.map((course) => (
             <CourseCard
               key={course.id}
@@ -82,6 +83,12 @@ const ELearning: React.FC = () => {
             />
           ))}
         </div>
+        ): (
+          <p className='text-center'>
+            
+          </p>
+        )}
+        
         
       </div>
 

@@ -93,8 +93,10 @@ const SingleCourse: React.FC = () => {
                     No Image
                 </div>
             )}
-            <h1 className='text-2xl font-bold'>{course.title}</h1>
+            <h1 className='font-bold'>{course.title}</h1>
+
             <p className= 'text-gray-700'>{course.summary}</p>
+
             {/* <p className='text-gray-600 whitespace-pre-line'>{course.description}</p> */}
             <SafeHTML html={course.description} className='prose max-w-none' />
         </div>

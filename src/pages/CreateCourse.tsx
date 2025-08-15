@@ -1,5 +1,5 @@
 import React from 'react'
-import CourseForm from '../components/CourseForm';
+import CourseForm from '../components/course/CourseForm';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import http from '../utils/http';

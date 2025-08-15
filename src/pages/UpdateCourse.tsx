@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import CourseForm from '../components/CourseForm';
+import CourseForm from '../components/course/CourseForm';
 import { useForm } from 'react-hook-form';
 import http from '../utils/http';
 import type { CourseFormValues } from '../types/elearning';
@@ -62,7 +62,7 @@ const UpdateCourse = () => {
 
       await http.post(`/api/course/update/${courseId}`, courseFormData);
 
-      navigate('/dashboard');
+      navigate('/elearning');
       
     }  catch (error) {
       const err = error as ErrorResponse;
