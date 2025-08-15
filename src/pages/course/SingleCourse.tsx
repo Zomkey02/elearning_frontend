@@ -98,7 +98,7 @@ const SingleCourse: React.FC = () => {
             <p className= 'text-gray-700'>{course.summary}</p>
 
             {/* <p className='text-gray-600 whitespace-pre-line'>{course.description}</p> */}
-            <SafeHTML html={course.description} className='prose max-w-none' />
+            <SafeHTML html={course.description} className='max-w-none' />
         </div>
 
         <div className='mt-6'>

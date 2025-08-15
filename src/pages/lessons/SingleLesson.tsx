@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import http from '../../utils/http';
 import { getThumbnailUrl } from '../../utils/getThumbnailUrl';
 import type { Lesson } from '../../types/elearning';
+import SafeHTML from '../../components/SafeHTML';
 
 
 /* interface SingleLesson {
@@ -60,8 +61,8 @@ const SingleLesson: React.FC = () =>{
         />
       ) : (<div>No thumbnail available</div> )}
 
-      <h1>{lesson.title}</h1>
-      <div className='flex items-center'>
+      
+      <div className='flex justify-end mt-0'>
         {lesson.duration !== null && (
           <p className='mr-6'><strong>Duration:</strong> {lesson.duration} min</p>
         )}
@@ -69,8 +70,10 @@ const SingleLesson: React.FC = () =>{
           <p><strong>Level:</strong> {lesson.level}</p>
         )}
       </div>
+      <h1>{lesson.title}</h1>
       
-      {lesson.content && <div className='whitespace-pre-line'>{lesson.content}</div>}
+     {/*  {lesson.content && <div className='whitespace-pre-line'>{lesson.content}</div>} */}
+      <SafeHTML html={lesson.content} className='max-w-none' />
 
     </div>
   )
