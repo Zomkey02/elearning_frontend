@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import http from '../../utils/http';
-import { getThumbnailUrl } from '../../utils/getThumbnailUrl';
+
 import type { Lesson } from '../../types/elearning';
-import SafeHTML from '../../components/SafeHTML';
+
+import LayoutStandard from '../../components/lesson/LayoutStandard';
+import LayoutVideo from '../../components/lesson/LayoutVideo'
 
 
 /* interface SingleLesson {
@@ -48,33 +50,20 @@ const SingleLesson: React.FC = () =>{
   if (error) return <div className='p-6'>Error: {error}</div>
   if (!lesson) return <div>Loading...</div>
 
-  const thumbnailUrl = getThumbnailUrl(lesson.thumbnail ?? null);
+  const layouts: Record<string, React.ComponentType<{ lesson: Lesson}>> = {
+    'standard': LayoutStandard,
+    'video-focused': LayoutVideo
+
+  };
+
+  const layoutKey = (lesson.layout_type ?? 'standard').toLowerCase()
+
+  const Layout = layouts[layoutKey] || LayoutStandard
+
 
   return (
-    <div className='max-w-4xl p-6 mx-auto space-y-6'>
-
-      {thumbnailUrl ? (
-        <img
-          src={thumbnailUrl}
-          alt={`Thumbnail for ${lesson.title}`}
-          className='object-cover w-full h-64 rounded-lg shadow'
-        />
-      ) : (<div>No thumbnail available</div> )}
-
-      
-      <div className='flex justify-end mt-0'>
-        {lesson.duration !== null && (
-          <p className='mr-6'><strong>Duration:</strong> {lesson.duration} min</p>
-        )}
-        {lesson.level !== null && (
-          <p><strong>Level:</strong> {lesson.level}</p>
-        )}
-      </div>
-      <h1>{lesson.title}</h1>
-      
-     {/*  {lesson.content && <div className='whitespace-pre-line'>{lesson.content}</div>} */}
-      <SafeHTML html={lesson.content} className='max-w-none' />
-
+    <div>
+      <Layout lesson={lesson} />
     </div>
   )
 }
