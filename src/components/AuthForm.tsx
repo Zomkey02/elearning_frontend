@@ -98,7 +98,12 @@ const AuthForm: React.FC<AuthFormProps> = ({
                 required: 'Password is required',
                 minLength: {
                   value: 8,
-                  message: 'Password must be at least 8 characters long',
+                  message: 'Password must be at least 8 characters',
+                },
+                validate: (val) => {
+                  if (!/[A-Z]/.test(val)) return 'Password must include uppercase';
+                  if (!/[0-9]/.test(val)) return 'Password must include a number';
+                  if (!/[@$!%*?&]/.test(val)) return 'Password must include a symbol';
                 },
               })}
             />
