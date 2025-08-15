@@ -20,6 +20,9 @@ import CreateLesson from './pages/CreateLesson'
 import SingleCourse from './pages/SingleCourse'
 import SingleLesson from './pages/SingleLesson'
 import UpdateLesson from './pages/UpdateLesson'
+import Blog from './pages/Blog'
+import About from './pages/About'
+import Contact from './pages/Contact'
 
 
 
@@ -28,9 +31,17 @@ const router = createBrowserRouter(
     <>
       <Route path="/" element={<RootLayout/>}>
         <Route index element={<Home/>} />
+
+        <Route path="elearning" element={<ELearning/>} />
+        <Route path="blog" element={<Blog/>} />
+        <Route path="about" element={<About/>} />
+
+        
+        <Route path="contact" element={<Contact/>} />
         <Route path="login" element={<Login/>} />
         <Route path="signup" element={<SignUp/>} />
-        <Route path="elearning" element={<ELearning/>} />
+
+      
         <Route path="course/:courseId" element={<SingleCourse/>} />
         <Route path="course/:courseId/lesson/:lessonId" element={<SingleLesson/>} />
 
