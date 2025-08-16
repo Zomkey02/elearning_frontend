@@ -2,7 +2,7 @@
 import { useCallback, useState } from "react";
 import { Link, NavLink } from 'react-router-dom'
 import LogOut from "../Logout";
-import LogoTwo from "../../assets/logos/logo_two.svg";
+import LogoOne from "../../assets/logos/logo_one.svg";
 import { useAuth } from "../../hooks/useAuth";
 
 
@@ -17,7 +17,7 @@ const Navbar = () => {
         <div className='flex items-center w-full py-4 mx-auto max-w-7xl'>
           {/* LOGO */}
           <NavLink to="/" className='flex items-center ml-0 mr-4' onClick={closeMenu}>
-            <img src={LogoTwo} alt="Logo" className='w-auto sm:h-6 md:h-7 lg:h-9 xl:h-12'/>
+            <img src={LogoOne} alt="Logo" className='w-auto sm:h-6 md:h-10 lg:h-15 xl:h-19'/>
           </NavLink>
           
           {/* DESKTOP NAV-Links */}
@@ -37,15 +37,17 @@ const Navbar = () => {
 
               {/* right nav links */}
               <div className='items-center hidden gap-4 lg:flex'>
-                <NavLink to='/contact' className='link-nav' >Contact</NavLink>
-
                 {isLoggedIn && (
-                  <NavLink to='/dashboard' className='link-nav' >Dashboard</NavLink>
+                  <>
+                    <NavLink to='/course/create' className='link-nav'>Create Course</NavLink>
+                    <NavLink to='/lesson/create' className='link-nav'>Create Lesson</NavLink>
+                    <NavLink to='/dashboard' className='link-nav' >My Profile</NavLink>
+                  </>
                 )}
 
                 {isLoggedIn ? ( <LogOut isVisible={true} /> ) : (
                   <>
-                  <NavLink to='/login' className='link-nav'>Login</NavLink>
+                    <NavLink to='/login' className='link-nav'>Login</NavLink>
                     <NavLink to='/signup' className='btn-nav'>Sign up</NavLink>
                   </>
                 )}            

@@ -44,9 +44,10 @@ const ELearning: React.FC = () => {
   
   return (
     <div className='grid max-w-6xl place-items-center'>
-      <h1 className='mb-4 text-3xl font-bold'>E-Learning</h1>
-      <div className='flex items-center justify-between w-full'>
 
+      <h1 className='mb-4 text-3xl font-bold'>E-Learning</h1>
+
+      <div className='flex items-center justify-between w-full'>
         <div className='flex mb-0 space-x-4'>
           {categories.map(({label, value}) => (
             <button 
@@ -60,19 +61,10 @@ const ELearning: React.FC = () => {
             </button>
           ))}
         </div>
-
-        {isAdmin && (
-          <div className='flex'>
-            <Link to='/course/create' className='px-4 py-2 border-2 border-transparent rounded text-primary hover:border-2 hover:border-primary'>
-              Create Course
-            </Link>
-          </div>
-        )}
-          
       </div>
       
-       {/* Course View */}
-      <div className='p-6 shadow-lg bg-primary_lighter min-h-[400px] w-full flex items-center justify-center rounded-bl-md rounded-br-md'>
+      {/* Course View */}
+      <div className='p-6 shadow-lg bg-primary_lighter min-h-[400px] w-full flex items-center justify-center rounded-bl-md rounded-br-md rounded-tr-md'>
         {filteredCourses.length > 0 ? (
           <div className='grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3'>
           {filteredCourses.map((course) => (
@@ -85,11 +77,9 @@ const ELearning: React.FC = () => {
         </div>
         ): (
           <p className='text-center'>
-            
+            no courses
           </p>
-        )}
-        
-        
+        )}        
       </div>
 
     </div>
