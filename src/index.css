@@ -53,7 +53,7 @@
     @apply font-semibold text-xl font-manrope leading-snug text-dark;
   }
   p {
-    @apply font-normal text-base font-manrope leading-relaxed text-dark;
+    @apply font-normal text-base inline font-manrope leading-relaxed text-dark;
   }
   a {
     @apply font-normal font-manrope text-primary hover:text-[#5b986f] transition;
@@ -84,11 +84,7 @@
   }
 
   .btn-secondary {
-    @apply bg-[#6DAE81] text-white px-4 py-2 rounded-lg text-sm hover:bg-[#5b986f] transition;
-  }
-
-  .btn-tertiary {
-    @apply bg-[#6DAE81] text-white px-4 py-2 rounded-lg text-sm hover:bg-[#5b986f] transition;
+    @apply bg-[#6DAE81] text-white rounded-xl hover:bg-[#5b986f] transition;
   }
   
   .btn-nav {
@@ -101,6 +97,20 @@
 
   .btn-delete {
     @apply border-2 border-[#EF476F] px-4 py-1 rounded-lg hover:bg-[#EF476F] hover:text-white;
+  }
+
+  /* Custom Form Fields*/
+
+  .form-input {
+    @apply w-full h-14 rounded-xl p-4 bg-gray-200 focus:ring-0;
+  }
+
+  .form-select {
+    @apply w-full p-2 bg-gray-200 h-14 rounded-xl;
+  }
+
+  .form-error {
+    @apply ml-1 text-red-500;
   }
 
 }
@@ -117,7 +127,7 @@
     @apply font-bold text-xl text-dark;
   }
   .tiptap-content p{
-    @apply text-base text-dark;
+    @apply text-base text-dark inline;
   }
   .tiptap-content ul{
     @apply list-disc list-inside space-y-1 pl-4;
