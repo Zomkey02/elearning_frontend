@@ -8,20 +8,8 @@ import Placeholder from '@tiptap/extension-placeholder';
 import { useEffect } from 'react';
 
 import { EditorIconButtons } from './components/EditorIconButtons';
-import BoldIcon from './assets/icons/editor/bold.svg?react';
-import ItalicIcon from './assets/icons/editor/italic.svg?react';
-import StrikeIcon from './assets/icons/editor/strikethrough.svg?react';
-import ParagraphIcon from './assets/icons/editor/paragraph.svg?react';import H2Icon from './assets/icons/editor/h-2.svg?react';
-import H3Icon from './assets/icons/editor/h-3.svg?react';
-import H4Icon from './assets/icons/editor/h-4.svg?react';
-import BulletListIcon from './assets/icons/editor/list-unordered.svg?react';
-import OrderedListIcon from './assets/icons/editor/list-ordered.svg?react';
-import BlockquoteIcon from './assets/icons/editor/align-justify.svg?react';
-import UndoIcon from './assets/icons/editor/arrow-go-back-line.svg?react';
-import RedoIcon from './assets/icons/editor/arrow-go-forward-line.svg?react';
-import HorizontalRuleIcon from './assets/icons/editor/separator.svg?react';
-import NoTextFormatIcon from './assets/icons/editor/format-clear.svg?react';
-import NoStructuralFormatIcon from './assets/icons/editor/close-line.svg?react';
+import { RiAlignJustify, RiAlignTop, RiArrowGoBackLine, RiArrowGoForwardLine, RiBold, RiDeleteBin6Line, RiFormatClear, RiH2, RiH3, RiH4, RiItalic, RiListOrdered, RiListUnordered, RiParagraph, RiStrikethrough } from 'react-icons/ri';
+import { IconContext } from 'react-icons';
 
 
 type TiptapProps = {
@@ -68,15 +56,15 @@ function MenuBar({ editor }: { editor: Editor }) {
   });
 
   return (
-    <div className="control-group">
-      <div className="button-group">
+    <div className="mb-1 control-group">
+      <div className='flex justify-between'>
         <EditorIconButtons
           label='bold'
           active={editor.isActive('bold')}
           disabled={!editorState.canBold}
           onClick={() => editor.chain().focus().toggleBold().run()}
         >
-          <BoldIcon className='w-5 h-5' />
+          <IconContext value={{ size:'1.2em'}}><RiBold /></IconContext>
         </EditorIconButtons>
 
         <EditorIconButtons
@@ -85,7 +73,7 @@ function MenuBar({ editor }: { editor: Editor }) {
           disabled={!editorState.canItalic}
           onClick={() => editor.chain().focus().toggleItalic().run()}
         >
-          <ItalicIcon className='w-5 h-5' />
+          <IconContext value={{ size:'1.2em' }}><RiItalic /></IconContext>
         </EditorIconButtons>
 
         <EditorIconButtons
@@ -94,7 +82,7 @@ function MenuBar({ editor }: { editor: Editor }) {
           disabled={!editorState.canStrike}
           onClick={() => editor.chain().focus().toggleStrike().run()}
         >
-          <StrikeIcon className='w-5 h-5' />
+          <IconContext value={{ size:'1.2em' }}><RiStrikethrough /></IconContext>
         </EditorIconButtons>
         
         <EditorIconButtons
@@ -102,7 +90,7 @@ function MenuBar({ editor }: { editor: Editor }) {
           active={editor.isActive('paragraph')}
           onClick={() => editor.chain().focus().setParagraph().run()}
         >
-          <ParagraphIcon className='w-5 h-5'/>
+          <IconContext value={{ size:'1.2em' }}><RiParagraph /></IconContext>
         </EditorIconButtons>
 
         <EditorIconButtons
@@ -110,7 +98,7 @@ function MenuBar({ editor }: { editor: Editor }) {
           active={editor.isActive('heading', { level: 2 })}
           onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
         >
-          <H2Icon className="w-5 h-5" />
+          <IconContext value={{ size:'1.2em' }}><RiH2 /></IconContext>
         </EditorIconButtons>
 
         <EditorIconButtons
@@ -118,7 +106,7 @@ function MenuBar({ editor }: { editor: Editor }) {
           active={editor.isActive('heading', { level: 3 })}
           onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
         >
-          <H3Icon className="w-5 h-5" />
+          <IconContext value={{ size:'1.2em' }}><RiH3 /></IconContext>
         </EditorIconButtons>
 
         <EditorIconButtons
@@ -126,7 +114,7 @@ function MenuBar({ editor }: { editor: Editor }) {
           active={editor.isActive('heading', { level: 4 })}
           onClick={() => editor.chain().focus().toggleHeading({ level: 4 }).run()}
         >
-          <H4Icon className="w-5 h-5" />
+          <IconContext value={{ size:'1.2em' }}><RiH4 /></IconContext>
         </EditorIconButtons>
 
         <EditorIconButtons
@@ -134,7 +122,7 @@ function MenuBar({ editor }: { editor: Editor }) {
           active={editor.isActive('bulletList')}
           onClick={() => editor.chain().focus().toggleBulletList().run()}
         >
-          <BulletListIcon className="w-5 h-5" />
+          <IconContext value={{ size:'1.2em' }}><RiListUnordered /></IconContext>
         </EditorIconButtons>
 
         <EditorIconButtons
@@ -142,7 +130,7 @@ function MenuBar({ editor }: { editor: Editor }) {
           active={editor.isActive('orderedList')}
           onClick={() => editor.chain().focus().toggleOrderedList().run()}
         >
-          <OrderedListIcon className="w-5 h-5" />
+          <IconContext value={{ size:'1.2em' }}><RiListOrdered /></IconContext>
         </EditorIconButtons>
 
         <EditorIconButtons
@@ -150,42 +138,42 @@ function MenuBar({ editor }: { editor: Editor }) {
           active={editor.isActive('blockquote')}
           onClick={() => editor.chain().focus().toggleBlockquote().run()}
         >
-          <BlockquoteIcon className="w-5 h-5" />
+          <IconContext value={{ size:'1.2em' }}><RiAlignJustify /></IconContext>
         </EditorIconButtons>
         
         <EditorIconButtons
           label="Remove Text Formatting"
           onClick={() => editor.chain().focus().unsetAllMarks().run()}
         >
-          <NoTextFormatIcon className="w-5 h-5" />
+          <IconContext value={{ size:'1.2em' }}><RiFormatClear /></IconContext>
         </EditorIconButtons>
 
         <EditorIconButtons
           label="Remove Structural Formatting"
           onClick={() => editor.chain().focus().clearNodes().run()}
         >
-          <NoStructuralFormatIcon className="w-5 h-5" />
+          <IconContext value={{ size:'1.2em' }}><RiDeleteBin6Line /></IconContext>
         </EditorIconButtons>
 
         <EditorIconButtons
           label="Horizontal Rule"
           onClick={() => editor.chain().focus().setHorizontalRule().run()}
         >
-          <HorizontalRuleIcon className="w-5 h-5" />
+          <IconContext value={{ size:'1.2em' }}><RiAlignTop /></IconContext>
         </EditorIconButtons>
 
         <EditorIconButtons
           label="Undo"
           onClick={() => editor.chain().focus().undo().run()}
         >
-          <UndoIcon className="w-5 h-5" />
+          <IconContext value={{ size:'1.2em' }}><RiArrowGoBackLine /></IconContext>
         </EditorIconButtons>
 
         <EditorIconButtons
           label="Redo"
           onClick={() => editor.chain().focus().redo().run()}
         >
-          <RedoIcon className="w-5 h-5" />
+          <IconContext value={{ size:'1.2em' }}><RiArrowGoForwardLine /></IconContext>
         </EditorIconButtons>
       </div>
     </div>
