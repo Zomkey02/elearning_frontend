@@ -29,7 +29,8 @@
   --color-primary_lighter: #A7DCA5; 
   --color-light: #FDFDFD;    
   --color-accent: #FFE6C7;          
-  --color-danger: #EF476F;             
+  --color-danger: #EF476F;    
+  --color-yellow: #FFD166;         
   --color-dark: #444444;
 }
 
@@ -92,15 +93,17 @@
   }
 
   .btn-edit {
-    @apply border-2 border-[#6DAE81] px-4 py-1 rounded-lg hover:bg-[#6DAE81] hover:text-white;
+    @apply border-2 border-primary px-4 py-1 rounded-lg hover:bg-primary hover:text-white transition;
   }
 
   .btn-delete {
-    @apply border-2 border-[#EF476F] px-4 py-1 rounded-lg hover:bg-[#EF476F] hover:text-white;
+    @apply border-2 border-danger px-4 py-1 rounded-lg hover:bg-danger hover:text-white;
+  }
+  .btn-cancel {
+    @apply border-2 border-gray-400 px-4 py-1 rounded-lg hover:bg-gray-200 hover:text-dark;
   }
 
   /* Custom Form Fields*/
-
   .form-input {
     @apply w-full h-14 rounded-xl p-4 bg-gray-200 focus:ring-0;
   }
@@ -115,7 +118,19 @@
 
 }
 
-@layer tiptap {
+@layer form-view {
+  .auth-form {
+    @apply w-full max-w-md px-8 pt-6 pb-8 mb-4 rounded shadow-md bg-white;
+  }
+  .auth-input {
+    @apply w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary;
+  }
+  .auth-label {
+    @apply text-sm block mb-2 font-semibold;
+  }
+  .auth-error {
+    @apply mt-1 text-sm text-red-500;
+  }
   /* Custom Editor Styles */
   .tiptap-content h2{
     @apply font-bold text-3xl text-dark;
@@ -141,4 +156,28 @@
 
 }
 
+@layer lessons-view {
+  /* Custom Editor Styles */
+  .lesson-content h2{
+    @apply font-bold text-3xl text-dark;
+    }
+  .lesson-content h3{
+    @apply font-bold text-2xl text-dark;
+  }
+  .lesson-content h4{
+    @apply font-bold text-xl text-dark;
+  }
+  .lesson-content p{
+    @apply text-base text-dark inline;
+  }
+  .lesson-content ul{
+    @apply list-disc list-inside space-y-1 pl-4;
+  }
+  .lesson-content ol{
+    @apply list-decimal list-inside space-y-1 pl-4;
+  }
+  .lesson-content li{
+    @apply leading-relaxed;
+  }
 
+}

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import { getThumbnailUrl } from '../../utils/getThumbnailUrl';
 import type { Course } from '../../types/elearning';
@@ -15,6 +15,16 @@ const CourseCard:React.FC<CourseCardProps> = ({ course, onDelete }) => {
     const {isAdmin} = useAuth();
 /*     const isAdmin = auth?.data?.role === 'admin'; */
     const thumbnailUrl = getThumbnailUrl(course.thumbnail ?? null);
+    
+    const [confirming, setConfirming] = useState(false);
+
+    const handleClick = () => {
+    if(!confirming) {
+      setConfirming(true);
+      return;
+    }
+    onDelete?.();
+  };
 
   return (
     <div className='overflow-hidden bg-white shadow-md rounded-xl'>
@@ -34,10 +44,10 @@ const CourseCard:React.FC<CourseCardProps> = ({ course, onDelete }) => {
             )}
 
             {/* Info */}
-            <div className='p-4'>
-            <h3 className='mb-1 text-xl font-semibold'>{course.title}</h3>
-            <p className='mb-2 text-sm text-gray-600'>{course.summary}</p>
-            <p className='text-sm text-gray-500'>Duration: {course.duration}</p>
+            <div className='p-4 '>
+                <h3 className='mb-1 text-xl font-semibold'>{course.title}</h3>
+                <p className='mb-2 text-sm '>{course.summary}</p>
+                <p className='block text-sm'>Duration: {course.duration}</p>
             </div>
         </Link>
 
@@ -48,12 +58,16 @@ const CourseCard:React.FC<CourseCardProps> = ({ course, onDelete }) => {
                     <button className=' btn-edit' type='button'>Edit</button>
                 </Link>
                 <button 
-                    onClick={onDelete}
-                    className='btn-delete'
-                    type='button'
+                    onClick={handleClick} 
+                    className={`btn-delete ${confirming? 'bg-danger text-white' : 'btn-delete'} `}
                 >
-                    Delete
+                {confirming ? 'Confirm Delete' : 'Delete'}
                 </button>
+                {confirming && (
+                    <button onClick= {() => setConfirming(false)} className='btn-cancel'> 
+                        Cancel
+                    </button>
+                )}
             </div>
         )}
     </div>

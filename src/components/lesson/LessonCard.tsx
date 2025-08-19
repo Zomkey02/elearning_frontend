@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import type { Lesson } from '../../types/elearning'
 import { useAuth } from '../../hooks/useAuth'
@@ -8,13 +8,22 @@ type LessonCardProps = {
     /* lesson: Pick<Lesson, 'id' | 'title' | 'duration' | 'level'>; */
     lesson: Lesson
     onDelete?: () => void
-}
+};
 
 
 const LessonCard: React.FC<LessonCardProps> = ({courseId, lesson, onDelete}) => {
 /*   const { auth } = useContext(AuthContext);
   const isAdmin = auth?.data?.role === 'admin'; */
   const {isAdmin} = useAuth();
+  const [confirming, setConfirming] = useState(false);
+
+  const handleClick = () => {
+    if(!confirming) {
+      setConfirming(true);
+      return;
+    }
+    onDelete?.();
+  };
 
   return (
     <div className='p-4 mt-6 mb-6 transition border rounded-lg shadow-md cursor-pointer hover:shadow-lg'>
@@ -38,9 +47,17 @@ const LessonCard: React.FC<LessonCardProps> = ({courseId, lesson, onDelete}) => 
                 Edit
               </button>
             </Link>
-            <button onClick={onDelete} className='btn-delete'>
-              Delete
+            <button 
+              onClick={handleClick} 
+              className={`btn-delete ${confirming? 'bg-danger text-white' : 'btn-delete'} `}
+            >
+              {confirming ? 'Confirm Delete' : 'Delete'}
             </button>
+            {confirming && (
+              <button onClick= {() => setConfirming(false)} className='btn-cancel'> 
+                Cancel
+              </button>
+            )}
           </div>
         )}
     </div>

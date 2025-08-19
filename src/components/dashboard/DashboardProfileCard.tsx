@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import ProfileFormUpdate from './ProfileFormUpdate';
 import http from '../../utils/http';
 import { useAuth } from '../../hooks/useAuth';
+import { IconContext } from 'react-icons';
+import { RiMailLine, RiUserLine } from 'react-icons/ri';
 
 const DashboardProfileCard = () => {
     const {user, isLoading, setAuth} = useAuth();
@@ -42,7 +44,7 @@ const DashboardProfileCard = () => {
             });
 
             setAuth({ data: null, status: 'loggedOut'});
-            navigate('/login');
+            navigate('/signup');
         } catch (error) {
             console.error('Error deleting user:', error);
             alert('Account deletion failed, please check your password and try again.');
@@ -50,11 +52,11 @@ const DashboardProfileCard = () => {
     };
 
   return (
-    <div>         
-        <div className='flex items-center justify-between mb-4'>
-            <h2 className='mb-4 text-xl font-semibold'>{editing ? 'Edit My Profile' : 'My Profile'}</h2>
+    <div className='w-full'>         
+        <div className='flex items-center justify-between max-w-sm mb-4'>
+            <h2 className='text-xl'>{editing ? 'Edit My Profile' : 'My Profile'}</h2>
             {editing && (
-                <button className='btn-primary' onClick={() => setEditing(false)}>
+                <button className='btn-cancel' onClick={() => setEditing(false)}>
                     Cancel Editing
                 </button>
             )}
@@ -63,41 +65,41 @@ const DashboardProfileCard = () => {
         {!editing ? (
             <>
                 <div className='flex items-start gap-4 mb-6'>
-                    <div className='p-3 bg-gray-500 rounded-xl'>
+                    <div className='p-1'>
+                        <IconContext value={{ size:'1.2em'}}><RiUserLine /></IconContext>
                     </div>
                     <div>
-                        <p className='font-semibold text-black'>Username</p>
-                        <p className='text-green-600'> { user.username } </p>
+                        <p className='text-primary'> { user.username } </p>
                     </div>
                 </div>
 
                 <div className='flex items-start gap-4 mb-6'>
-                    <div className='p-3 bg-gray-500 rounded-xl'>
+                    <div className='p-1'>
+                        <IconContext value={{ size:'1.2em'}}><RiMailLine /></IconContext>
                     </div>
                     <div>
-                        <p className='font-semibold text-black'>Email</p>
-                        <p className='text-green-600'> { user.email } </p>
+                        <p className='text-primary'> { user.email } </p>
                     </div>
                 </div>
-                <div className='flex gap-3'>
-                    <button className='btn-primary' onClick={() => setEditing(true)}>
+                <div className='flex w-full gap-3'>
+                    <button className='flex-shrink-0 btn-edit' onClick={() => setEditing(true)}>
                         Edit Profile
                     </button>
 
                     {!confirmDelete ? (
-                        <button className='btn-primary' onClick={() => setConfirmDelete(true)}>Delete User</button>
+                        <button className='btn-delete' onClick={() => setConfirmDelete(true)}>Delete User</button>
                     ): (
-                        <div className='flex items-center gap-2'>
+                        <div className='flex items-center w-full gap-2'>
                             <input 
                                 type="password"
                                 placeholder='Enter current password'
                                 value={deletePassword}
                                 onChange={(e) => setDeletePassword(e.target.value)}
-                                className='w-full px-3 py-2 border border-gray-300 rounded'
+                                className='max-w-xs h-9 auth-input'
                             />
                             <div className='flex gap-2'>
-                                <button className='btn-primary' onClick={() => {setConfirmDelete(false); setDeletePassword('');}}>Cancel</button>
-                                <button className='btn-primary' onClick={handleDeleteUser}>Confirm Delete</button>
+                                <button className='btn-cancel' onClick={() => {setConfirmDelete(false); setDeletePassword('');}}>Cancel</button>
+                                <button className='text-white btn-delete bg-danger' onClick={handleDeleteUser}>Confirm Delete</button>
                             </div>
                         </div>
                     )}

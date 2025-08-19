@@ -47,7 +47,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
     <div className='flex items-center justify-center min-h-screen px-4'>
       <form 
        onSubmit={handleSubmit(onSubmit)}
-       className='w-full max-w-md px-8 pt-6 pb-8 mb-4 bg-white rounded shadow-md'>
+       className='auth-form'>
         <fieldset>
           <legend className='mb-6 text-2xl font-bold text-center'>{legend}</legend>
 
@@ -55,29 +55,29 @@ const AuthForm: React.FC<AuthFormProps> = ({
             <div className='mb-4'>
               <label 
                htmlFor='username'
-               className='block mb-2 text-sm font-semibold text-gray-700'
-              >Username:
+               className='auth-label'
+              >Username
               </label>
               <input 
                type='text'
                id='username'
-               className='w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500'
+               className='auth-input'
                {...register('username', { required: 'Username is required' })}
               />
               <div>
-                {errors.username && <div className='mt-1 text-sm text-red-500 '>{errors.username.message}</div>}
+                {errors.username && <div className='auth-error'>{errors.username.message}</div>}
               </div>
             </div>
           )}
 
           <div className='mb-4'>
-            <label htmlFor='email' className='block mb-2 text-sm font-semibold text-gray-700'>
+            <label htmlFor='email' className='auth-label'>
               Email
             </label>
             <input
               type='email'
-              id='email"
-              className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500'
+              id='email'
+              className='auth-input'
               {...register('email', {
                 required: 'Email is required',
                 pattern: {
@@ -87,12 +87,12 @@ const AuthForm: React.FC<AuthFormProps> = ({
               })}
             />
             <div>
-                {errors.email && <div className='mt-1 text-sm text-red-500'>{errors.email.message}</div>}
+                {errors.email && <div className='auth-error'>{errors.email.message}</div>}
             </div>
           </div>
 
           <div className='mb-6'>
-            <label htmlFor='password' className='block mb-2 text-sm font-semibold text-gray-700'>
+            <label htmlFor='password' className='auth-label'>
               Password
             </label>
             <div className='relative'>
@@ -100,7 +100,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
                 autoComplete='off'
                 type={showPassword ? 'text' : 'password'} 
                 id='password'
-                className='w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500'
+                className='auth-input'
                 {...register('password', {
                   required: 'Password is required',
                   minLength: {
@@ -125,13 +125,13 @@ const AuthForm: React.FC<AuthFormProps> = ({
               </button> 
             </div>
             <div>
-                {errors.password && <div className='mt-1 text-sm text-red-500'>{errors.password.message}</div>}
+                {errors.password && <div className='auth-error'>{errors.password.message}</div>}
             </div>
           </div>
           
           {includePasswordConfirmation && (
             <div className='mb-6'>
-              <label htmlFor='password_confirmation' className='block mb-2 text-sm font-semibold'>
+              <label htmlFor='password_confirmation' className='auth-label'>
                 Confirm Password
               </label>
               <div className='relative'>
@@ -139,7 +139,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
                   autoComplete="off"
                   type={showPasswordConfirm ? 'text' : 'password'} 
                   id='password_confirmation'
-                  className='w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500'
+                  className='auth-input'
                   {...register('password_confirmation', {
                     required: 'Please confirm your password',
                     validate: (value) =>
@@ -151,14 +151,14 @@ const AuthForm: React.FC<AuthFormProps> = ({
                   type='button'
                   onClick={() => setShowPasswordConfirm(!showPasswordConfirm)} 
                   className='absolute inset-y-0 flex items-center right-3'>
-                    <IconContext.Provider value={{ size:'1.5em', color:'green'}}>
+                    <IconContext.Provider value={{ size:'1.5em', color:'primary'}}>
                       {showPasswordConfirm ? <RiEyeOffLine /> : <RiEyeLine />}
                     </IconContext.Provider>
                 </button> 
               </div>
               <div>
                 {errors.password_confirmation && (
-                  <div className='mt-1 text-sm text-red-500'>{errors.password_confirmation.message}</div>
+                  <div className='auth-error'>{errors.password_confirmation.message}</div>
                 )}
               </div>
             </div>
@@ -167,7 +167,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
           <button
             disabled={isSubmitting}
             type='submit'
-            className='w-full bg-[#6DAE81] text-white font-semibold py-2 rounded hover:bg-green-700 transition'
+            className='w-full py-2 font-semibold rounded btn-secondary'
           >
             {buttonText}
           </button>
