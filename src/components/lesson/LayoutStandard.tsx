@@ -10,30 +10,27 @@ export default function LayoutStandard({lesson}: LessonResponse) {
     const thumbnailUrl = getThumbnailUrl(lesson.thumbnail ?? null);
 
   return (
-    <div className='max-w-4xl p-6 mx-auto space-y-6'>
-
-        <p>Layout Type: {lesson.layout_type}</p>
+    <div>
     
           {thumbnailUrl ? (
             <img
               src={thumbnailUrl}
               alt={`Thumbnail for ${lesson.title}`}
-              className='object-cover w-full h-64 rounded-lg shadow'
+              className='object-cover w-full h-64 mb-0 rounded-lg shadow'
             />
           ) : (<div>No thumbnail available</div> )}
     
-          
-          <div className='flex justify-end mt-0'>
-            {lesson.duration !== null && (
-              <p className='mr-6'><strong>Duration:</strong> {lesson.duration} min</p>
-            )}
-            {lesson.level !== null && (
-              <p><strong>Level:</strong> {lesson.level}</p>
-            )}
+          <div className='flex items-center justify-end w-full pt-0 mt-0 mb-0'>
+              {lesson.duration !== null && (
+                <p className='mr-6'><strong>Duration:</strong> {lesson.duration} min</p>
+              )}
+              {lesson.level !== null && (
+                <p><strong>Level:</strong> {lesson.level}</p>
+              )}
           </div>
-          <h1>{lesson.title}</h1>
+            
+          <h1 className='mb-2'>{lesson.title}</h1>
           
-         {/*  {lesson.content && <div className='whitespace-pre-line'>{lesson.content}</div>} */}
           <SafeHTML html={lesson.content} className='max-w-none' />
     
     </div>

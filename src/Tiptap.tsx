@@ -8,7 +8,7 @@ import Placeholder from '@tiptap/extension-placeholder';
 import { useEffect } from 'react';
 
 import { EditorIconButtons } from './components/EditorIconButtons';
-import { RiAlignJustify, RiAlignTop, RiArrowGoBackLine, RiArrowGoForwardLine, RiBold, RiDeleteBin6Line, RiFormatClear, RiH2, RiH3, RiH4, RiItalic, RiListOrdered, RiListUnordered, RiParagraph, RiStrikethrough } from 'react-icons/ri';
+import { RiAlignJustify, RiAlignTop, RiArrowGoBackLine, RiArrowGoForwardLine, RiBold, RiCornerDownLeftFill, RiDeleteBin6Line, RiFormatClear, RiH2, RiH3, RiH4, RiItalic, RiListOrdered, RiListUnordered, RiParagraph, RiStrikethrough } from 'react-icons/ri';
 import { IconContext } from 'react-icons';
 
 
@@ -155,6 +155,13 @@ function MenuBar({ editor }: { editor: Editor }) {
           <IconContext value={{ size:'1.2em' }}><RiDeleteBin6Line /></IconContext>
         </EditorIconButtons>
 
+        <EditorIconButtons
+          label="Hard break"
+          onClick={() => editor.chain().focus().setHardBreak().run()}
+        >
+          <IconContext value={{ size:'1.2em' }}><RiCornerDownLeftFill /></IconContext>
+        </EditorIconButtons>
+        
         <EditorIconButtons
           label="Horizontal Rule"
           onClick={() => editor.chain().focus().setHorizontalRule().run()}

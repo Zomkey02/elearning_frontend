@@ -95,43 +95,42 @@ const onSubmit = async (data: ProfileFormUpdateValues) => {
         onSubmit={ handleSubmit(onSubmit)}
         className={className ?? 'w-full max-w-xl p-4'}
     >
-        <h3 className='mb-4 text-xl font-bold'>Update Profile</h3>
 
         <div className='mb-4'>
-            <label className='block mb-2 text-sm font-bold text-gray-700' htmlFor='username'>
+            <label className='auth-label' htmlFor='username'>
                 Username
             </label>
             <input
                 id='username'
                 type='text'
-                className='w-full px-3 py-2 border rounded border-gary-300 focus:outline-none focus:ring-2 focus:ring-green-500'
+                className='auth-input'
                 {...register('username', { required: 'Username is required.'})}
             />
-            {errors.username && <div className='mt-1 text-sm text-red-500'>{errors.username.message}</div>}
+            {errors.username && <div className='auth-error'>{errors.username.message}</div>}
         </div>
 
         <div className='mb-4'>
-            <label className='block mb-2 text-sm font-bold text-gray-700' htmlFor='email'>
+            <label className='auth-label' htmlFor='email'>
                 Email
             </label>
             <input
                 id='email'
                 type='email'
-                className='w-full px-3 py-2 border rounded border-gary-300 focus:outline-none focus:ring-2 focus:ring-green-500'
+                className='auth-input'
                 {...register('email', {pattern: {value: /^\S+@\S+$/i, message: 'Invalid email addres'},})}
             />
-            {errors.email && <div className='mt-1 text-sm text-red-500'>{errors.email.message}</div>}
+            {errors.email && <div className='auth-error'>{errors.email.message}</div>}
         </div>
 
         <div className='mb-4'>
-            <label className='block mb-2 text-sm font-bold text-gray-700' htmlFor='password'>
+            <label className='auth-label' htmlFor='password'>
                 New Password (optional)
             </label>
             <input
                 id='password'
                 type='password'
                 autoComplete='off'
-                className='w-full px-3 py-2 border rounded border-gary-300 focus:outline-none focus:ring-2 focus:ring-green-500'
+                className='auth-input'
                 {...register('password', {
                     validate: (val) => {
                         if (!val) return true;
@@ -143,43 +142,43 @@ const onSubmit = async (data: ProfileFormUpdateValues) => {
                     },
                 })}
             />
-            {errors.password && <div className='mt-1 text-sm text-red-500'>{errors.password.message}</div>}
+            {errors.password && <div className='auth-error'>{errors.password.message}</div>}
         </div>
 
         {pwd && (
             <div className='mb-4'>
-                <label className='block mb-2 text-sm font-bold text-gray-700' htmlFor='password_confirmation'>
+                <label className='auth-label' htmlFor='password_confirmation'>
                     Confirm New Password
                 </label>
                 <input
                     id='password_confirmation'
                     type='password'
                     autoComplete='off'
-                    className='w-full px-3 py-2 border rounded border-gary-300 focus:outline-none focus:ring-2 focus:ring-green-500'
+                    className='auth-input'
                     {...register('password_confirmation', {
                         required: 'Please confirm new password',
                         validate: (value) => value === pwd || 'Passwords do not match',
                     })}
                 />
                 {errors.password_confirmation && (
-                    <div className='mt-1 text-sm text-red-500'>{errors.password_confirmation.message}</div>
+                    <div className='auth-error'>{errors.password_confirmation.message}</div>
                 )}
             </div>
         )}
 
         <div className='mb-6'>
-            <label className='block mb-2 text-sm font-bold text-gray-700' htmlFor='current_password'>
+            <label className='auth-label' htmlFor='current_password'>
                 Current Password required
             </label>
             <input 
                 id='current_password'
                 type='password'
                 autoComplete='off'
-                className='w-full px-3 py-2 border rounded border-gary-300 focus:outline-none focus:ring-2 focus:ring-green-500'
+                className='auth-input'
                 {...register('current_password', {required: 'Current password is required'})}
             />
             {errors.current_password && (
-                <div className='mt-1 text-sm text-red-500'>{errors.current_password.message}</div>
+                <div className='auth-error'>{errors.current_password.message}</div>
             )}
         </div>
         <button

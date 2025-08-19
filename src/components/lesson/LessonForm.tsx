@@ -169,7 +169,7 @@ return (
                   onChange={field.onChange} 
                   placeholder='Write your content' 
                 />
-                {errors.content && <p className='form-error'>{errors.content.message}</p>}
+                {errors.content && <p className='form-error max-h-50'>{errors.content.message}</p>}
               </>
             )}
           />

@@ -1,7 +1,7 @@
 export type Course = {
   id: number;
   title: string;
-  summary: string;
+  summary?: string;
   description?: string;
   duration?: string;
   thumbnail?: string | null;
@@ -26,7 +26,7 @@ export type Lesson = {
     title: string;
     description: string;
     summary?: string;
-    content?: string;
+    content: string;
     thumbnail?: string | null;
     duration?: number;
     level?: 'beginner' | 'intermediate' | 'advanced';
