@@ -1,5 +1,4 @@
 import DOMPurify from 'dompurify';
-import React from 'react';
 
 type SafeHTMLProps = {
     html?: string;

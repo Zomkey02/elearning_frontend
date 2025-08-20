@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { getThumbnailUrl } from '../../utils/getThumbnailUrl';
 import type { Lesson } from '../../types/elearning';
-import SafeHTML from '../SafeHTML';
+import SafeHTML from '../../utils/SafeHTML';
 
 type LessonResponse = { lesson: Lesson };
 
