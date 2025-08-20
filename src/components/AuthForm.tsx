@@ -25,11 +25,9 @@ const AuthForm: React.FC<AuthFormProps> = ({
     handleSubmit,
     watch,
     formState: { errors, isSubmitting },
-    clearErrors,
   } = useForm<AuthFormData>();
 
   const onSubmit = async (data: AuthFormData) => {
-    clearErrors();
     try {
       await http.get('/sanctum/csrf-cookie');
       await http.post(endpoint, data);

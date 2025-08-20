@@ -1,6 +1,6 @@
 
 import { useCallback, useState } from "react";
-import { Link, NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import LogOut from "../Logout";
 import LogoOne from "../../assets/logos/logo_one.svg";
 import { useAuth } from "../../hooks/useAuth";
