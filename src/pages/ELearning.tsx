@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import CourseCard from '../components/course/CourseCard'
 import http from '../utils/http'
 import type {Course} from '../types/elearning'
-import { Link } from 'react-router-dom';
 
 import { useAuth } from "../hooks/useAuth";
 

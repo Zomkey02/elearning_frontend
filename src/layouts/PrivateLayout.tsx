@@ -1,12 +1,13 @@
 import { useLocation, Navigate, Outlet } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
+import { PageLoader } from '../components/Loading';
 
 const PrivateLayout = () => {
     /* const { auth } = useContext(AuthContext); */
   const { isLoading, isLoggedIn} = useAuth();
   const location = useLocation();
 
-  if (isLoading) return '...Loading';
+  if (isLoading) return <PageLoader label='Loading' />;
 
 
   return isLoggedIn ? (

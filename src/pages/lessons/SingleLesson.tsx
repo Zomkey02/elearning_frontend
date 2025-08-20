@@ -9,6 +9,7 @@ import LayoutVideo from '../../components/lesson/LayoutVideo'
 import LessonCompleteButton from '../../components/LessonCompleteButton';
 import LayoutImgLeft from '../../components/lesson/LayoutImgLeft';
 import LayoutInteractive from '../../components/lesson/LayoutInteractive';
+import { PageLoader } from '../../components/Loading';
 
 
 /* interface SingleLesson {
@@ -28,6 +29,7 @@ type LessonResponse = { lesson: Lesson };
 const SingleLesson: React.FC = () =>{
   const { courseId, lessonId } = useParams<{ courseId: string; lessonId: string }>();
   const [lesson, setLesson ] = useState<Lesson | null>(null);
+  const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
@@ -44,14 +46,16 @@ const SingleLesson: React.FC = () =>{
         const msg = err instanceof Error ? err.message: 'Unknown error';
         console.error('Failed to fetch lessons:', err);
         setError(msg);
+      } finally {
+        setLoading(false);
       }
     };
     fetchLesson();
   }, [courseId, lessonId]);
 
-  
+  if (loading) return <PageLoader label=' Loading Lesson' />
   if (error) return <div className='p-6'>Error: {error}</div>
-  if (!lesson) return <div>Loading...</div>
+  if (!lesson) return <div>No lesson </div>
 
   const layouts: Record<string, React.ComponentType<{ lesson: Lesson}>> = {
     'standard': LayoutStandard,

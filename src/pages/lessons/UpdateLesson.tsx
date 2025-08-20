@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import LessonForm from '../../components/lesson/LessonForm'
 import http from '../../utils/http';
 import type { LessonFormValues } from '../../types/elearning';
+import { SectionLoader } from '../../components/Loading';
 
 interface ErrorResponse {
   response?: {
@@ -25,42 +26,51 @@ const UpdateLesson = () => {
   useEffect(() => {
     const fetchLesson = async () => {
       try {
-        if (!courseId || !lessonId) return;
+        if (!courseId || !lessonId) {
+          console.error('missing course or lessson')
+          setLoading(false);
+          return;
+        }
+
         const response = await http.get(`/api/course/${courseId}/lesson/${lessonId}`);
         const lesson = response.data.lesson;
         const allCourses = (response.data.courses);
 
         setCourses(allCourses);
+        
         setDefaultValues({
           course_id: lesson.course_id,
-          title: lesson.title || '',
-          slug: lesson.slug || '',
-          summary: lesson.summary || '',
-          content: lesson.content || '',
+          title: lesson.title,
+          slug: lesson.slug,
+          summary: lesson.summary,
+          content: lesson.content,
           thumbnail: [] as unknown as FileList,
-          duration: lesson.duration || 0,
-          level: lesson.level || 'beginner',
-          status: lesson.status || 'draft',
-          layout_type: lesson.layout_type || 'standard',
-          thumbnailUrl: lesson.thumbnail ? `http://localhost:8000/${lesson.thumbnail}` : undefined,
+          duration: lesson.duration,
+          level: lesson.level,
+          status: lesson.status,
+          layout_type: lesson.layout_type ,
+          thumbnailUrl: `http://localhost:8000/${lesson.thumbnail}`,
         });
       } catch (error) {
-        console.error('Failed to fetch courses:', error);
+        console.error('Failed to fetch lesson data:', error);
       } finally {
-      setLoading(false);
-    }
-    };
-    fetchLesson();
+        setLoading(false);
+      }
+    }; fetchLesson();
+
   }, [courseId, lessonId]);
 
   if (loading) {
-    return <div className="text-center">Loading...</div>;
+    return (
+      <div className='text-center'>
+        <SectionLoader label='Loading Lesson Data' />
+      </div>
+    );
   }
 
   if (!defaultValues) {
-    return <div className="text-center">Lesson not found</div>;
+    return <div>Lesson Data not found.</div>
   }
-    
 
   const onSubmit = async (data: LessonFormValues) => {
     try {
@@ -71,7 +81,9 @@ const UpdateLesson = () => {
       lessonFormData.append('slug', data.slug);
       lessonFormData.append('summary', data.summary);
       lessonFormData.append('content', data.content);
-      lessonFormData.append('thumbnail', data.thumbnail[0]);
+      if (data.thumbnail?.[0]) {
+        lessonFormData.append('thumbnail', data.thumbnail[0]);
+      }
       lessonFormData.append('duration', String(data.duration));
       lessonFormData.append('level', data.level);
       lessonFormData.append('status', data.status);
@@ -80,7 +92,7 @@ const UpdateLesson = () => {
 
       await http.post(`/api/course/${data.course_id}/lesson/update/${lessonId}`, lessonFormData);
 
-      navigate(`/course/${data.course_id}`);
+      navigate(`/course/${data.course_id}/lesson/${lessonId}`);
 
     } catch (error) {
       const err = error as ErrorResponse;

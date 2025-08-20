@@ -4,6 +4,7 @@ import CourseForm from '../../components/course/CourseForm';
 import { useForm } from 'react-hook-form';
 import http from '../../utils/http';
 import type { CourseFormValues } from '../../types/elearning';
+import { SectionLoader } from '../../components/Loading';
 
 
 interface ErrorResponse {
@@ -19,27 +20,29 @@ const UpdateCourse = () => {
   const navigate = useNavigate();
   const { setError } = useForm<CourseFormValues>();
   const [defaultValues, setDefaultValues] = useState<CourseFormValues | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchCourse = async () => {
       try {
         const response = await http.get(`/api/course/${courseId}`);
-       {/* console.log(response.data);*/}
         const course = response.data.course;
 
         setDefaultValues({
-          title: course.title || '',
-          slug: course.slug || '',
-          summary: course.summary || '',
-          category: course.category || '',
+          title: course.title,
+          slug: course.slug,
+          summary: course.summary,
+          category: course.category,
           thumbnail: [] as unknown as FileList,
-          description: course.description || '',
-          duration: course.duration || '',
-          status: course.status || '',
+          description: course.description,
+          duration: course.duration,
+          status: course.status,
           thumbnailUrl: `http://localhost:8000/${course.thumbnail}`,
         });
       } catch (error) {
         console.error('Failed to load course data', error);
+      } finally {
+        setLoading(false);
       }
     }; fetchCourse();
   }, [courseId]);
@@ -52,7 +55,7 @@ const UpdateCourse = () => {
       courseFormData.append('title', data.title);
       courseFormData.append('slug', data.slug);
       courseFormData.append('summary', data.summary);
-      if (data.thumbnail && data.thumbnail.length > 0) {
+      if (data.thumbnail?.[0]) {
         courseFormData.append('thumbnail', data.thumbnail[0]);
       }
       courseFormData.append('description', data.description);
@@ -62,11 +65,12 @@ const UpdateCourse = () => {
 
       await http.post(`/api/course/update/${courseId}`, courseFormData);
 
-      navigate('/elearning');
+      navigate(`/course/${courseId}`);
       
-    }  catch (error) {
+    }  catch (error:any) {
       const err = error as ErrorResponse;
       const validationErrors = err.response?.data?.errors; 
+      console.log(err);
 
       if (validationErrors) {
         Object.entries(validationErrors).forEach(([key, value]) => {
@@ -79,7 +83,21 @@ const UpdateCourse = () => {
     } 
   };
 
-  if (!defaultValues) return <div className='text-center'>Loading...</div>
+  if (loading) {
+    return (
+      <div className='text-center'>
+        <SectionLoader label='Loading Course Data' />
+      </div>
+    )
+  }
+
+  if (!defaultValues) {
+    return (
+      <div className='text-center'>
+        Course not found
+      </div>
+    );
+  }
 
   return (
     <div>

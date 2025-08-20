@@ -6,6 +6,8 @@ import { getThumbnailUrl } from '../../utils/getThumbnailUrl'
 import type {Course, Lesson} from '../../types/elearning'
 import SafeHTML from '../../components/SafeHTML'
 import { useAuth } from '../../hooks/useAuth'
+import { PageLoader } from '../../components/Loading'
+import CourseProgressRow from '../../components/CourseProgressRow'
 
 /* interface Lesson {
     id: number
@@ -32,7 +34,7 @@ const SingleCourse: React.FC = () => {
     const [error, setError] = useState<string | null>(null)
 /*     const {auth} = useContext(AuthContext);
     const isAdmin = auth?.data?.role === 'admin'; */
-    const {isAdmin} = useAuth();
+    const {isAdmin, isLoggedIn} = useAuth();
 
     useEffect(() => {
         const fetchCourse = async () => {
@@ -58,25 +60,25 @@ const SingleCourse: React.FC = () => {
         fetchCourse();
     }, [courseId]);
 
-    if (loading) return <div className='p-6'>Loading...</div>
+    if (loading) return <PageLoader label=' Loading Course' />
     if (error) return <div className='p-6'>Error: {error}</div>
     if (!course) return <div className="p-6">No course found</div>
 
 
     const thumbnailUrl = getThumbnailUrl(course.thumbnail ?? null);
 
-  const handleDeleteLesson = async (lessonId: number) => {
-    try {
-      await http.delete(`/api/course/${courseId}/lesson/delete/${lessonId}`);
-      setCourse(prev => 
-        prev
-            ? {...prev, lessons: (prev.lessons ?? []).filter(lesson => lesson.id !== lessonId)}
-            : prev
-      );
-    } catch (error) {
-      console.error('Failed to delete lesson:', error);
-    }
-  };
+    const handleDeleteLesson = async (lessonId: number) => {
+        try {
+        await http.delete(`/api/course/${courseId}/lesson/delete/${lessonId}`);
+        setCourse(prev => 
+            prev
+                ? {...prev, lessons: (prev.lessons ?? []).filter(lesson => lesson.id !== lessonId)}
+                : prev
+        );
+        } catch (error) {
+        console.error('Failed to delete lesson:', error);
+        }
+    };
     
   return (
     <div className='max-w-4xl p-6 mx-auto space-y-6'>
@@ -95,14 +97,16 @@ const SingleCourse: React.FC = () => {
             )}
             <h1 className='font-bold'>{course.title}</h1>
 
-            <p className= 'text-gray-700'>{course.summary}</p>
-
             {/* <p className='text-gray-600 whitespace-pre-line'>{course.description}</p> */}
             <SafeHTML html={course.description} className='max-w-none' />
         </div>
 
         <div className='mt-6'>
             <h2 className='mb-4 text-2xl font-semibold'>Lessons</h2>
+
+            {isLoggedIn && (
+                <CourseProgressRow course={course} showCaption={true} />
+            )}
 
             {isAdmin && (
                 <div className='mb-10'>
