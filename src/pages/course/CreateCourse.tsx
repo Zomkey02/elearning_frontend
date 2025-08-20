@@ -25,7 +25,7 @@ const CreateCourse = () => {
       courseFormData.append('title', data.title);
       courseFormData.append('slug', data.slug);
       courseFormData.append('summary', data.summary);
-      if (data.thumbnail && data.thumbnail.length > 0) {
+      if (data.thumbnail?.[0]) {
         courseFormData.append('thumbnail', data.thumbnail[0]);
       }
       courseFormData.append('description', data.description);

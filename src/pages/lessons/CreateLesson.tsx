@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import LessonForm from '../../components/lesson/LessonForm'
 import { useNavigate, useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
@@ -43,7 +43,9 @@ const CreateLesson = () => {
       lessonFormData.append('slug', data.slug);
       lessonFormData.append('summary', data.summary);
       lessonFormData.append('content', data.content);
-      lessonFormData.append('thumbnail', data.thumbnail[0]);
+      if (data.thumbnail?.[0]) {
+        lessonFormData.append('thumbnail', data.thumbnail[0]);
+      }
       lessonFormData.append('duration', String(data.duration));
       lessonFormData.append('level', data.level);
       lessonFormData.append('status', data.status);
