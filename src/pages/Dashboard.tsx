@@ -1,7 +1,7 @@
 import React from 'react'
 import DashboardProfileCard from '../components/dashboard/DashboardProfileCard';
-import DashboardAdminFunctions from '../components/dashboard/DashboardAdminFunctions';
 import { useAuth } from '../hooks/useAuth';
+import DashboardUserProgress from '../components/dashboard/DashboardUserProgress';
 
 const Dashboard: React.FC = () => {
     const {user, isAdmin} = useAuth();
@@ -16,26 +16,33 @@ const Dashboard: React.FC = () => {
                 </h1>
             </div>
 
-            <div className='flex flex-col gap-6 mb-8 lg:flex-row'>
+            <div className='flex mb-8 '>
 
                 {isAdmin ? (
-                    <>
+                    <div className='w-full'>
                         {/* Admin functions*/}
-                        <div className='lg:w-[70%] w-full bg-white p-4 rounded-xl shadow'>
+                        <div className='w-full p-4 bg-white shadow rounded-xl'>
                             <DashboardProfileCard/>
                         </div>
                         
-                        <div className='lg:w-[30%] w-full bg-white p-4 rounded-xl shadow'>
+                        {/* <div className='lg:w-[30%] w-full bg-white p-4 rounded-xl shadow'>
                             <h2 className='mb-4 text-xl font-semibold'>My Functions</h2>
                             <DashboardAdminFunctions/>
+                        </div> */}
+
+                        <div className='w-full p-4'>
+                            <DashboardUserProgress />
                         </div>
                         
-                    </>
+                    </div>
                 ) : (
                     <>
                         {/* Profil info*/}
-                        <div className='p-4 bg-white shadow lg:w-full rounded-xl'>
+                        <div className='p-4 bg-white shadow lg:w-[50%} w-full rounded-xl'>
                             <DashboardProfileCard/>
+                        </div>
+                        <div className='lg:w-[40%]'>
+                            <DashboardUserProgress />
                         </div>
                     </>
                 )}
