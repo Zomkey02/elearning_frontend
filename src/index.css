@@ -77,30 +77,30 @@
   }
   /* Custom button sytles*/
   .btn-hero{
-    @apply bg-primary text-light px-6 py-3 font-semibold text-3xl rounded-lg hover:bg-[#5b986f] transition;
+    @apply bg-primary cursor-pointer text-light px-6 py-3 font-semibold text-3xl rounded-lg hover:bg-[#5b986f] transition;
   }
 
   .btn-primary {
-    @apply bg-[#6DAE81] text-white px-6 py-2 rounded-lg hover:bg-[#5b986f] transition;
+    @apply bg-[#6DAE81] cursor-pointer text-white px-6 py-2 rounded-lg hover:bg-[#5b986f] transition;
   }
 
   .btn-secondary {
-    @apply bg-[#6DAE81] text-white rounded-xl hover:bg-[#5b986f] transition;
+    @apply bg-[#6DAE81] cursor-pointer text-white rounded-xl hover:bg-[#5b986f] transition;
   }
   
   .btn-nav {
-    @apply bg-primary text-white px-3 py-1 rounded-lg font-semibold hover:shadow-md transition;
+    @apply bg-primary cursor-pointer text-white px-3 py-1 rounded-lg font-semibold hover:shadow-md transition;
   }
 
   .btn-edit {
-    @apply border-2 border-primary px-4 py-1 rounded-lg hover:bg-primary hover:text-white transition;
+    @apply border-2 cursor-pointer border-primary px-4 py-1 rounded-lg hover:bg-primary hover:text-white transition;
   }
 
   .btn-delete {
-    @apply border-2 border-danger px-4 py-1 rounded-lg hover:bg-danger hover:text-white;
+    @apply border-2 cursor-pointer border-danger px-4 py-1 rounded-lg hover:bg-danger hover:text-white;
   }
   .btn-cancel {
-    @apply border-2 border-gray-400 px-4 py-1 rounded-lg hover:bg-gray-200 hover:text-dark;
+    @apply border-2 cursor-pointer border-gray-400 px-4 py-1 rounded-lg hover:bg-gray-200 hover:text-dark;
   }
 
   /* Custom Form Fields*/
