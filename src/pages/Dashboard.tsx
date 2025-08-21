@@ -25,6 +25,7 @@ const Dashboard: React.FC = () => {
                             <DashboardProfileCard/>
                         </div>
                         
+                        {/* Following functions were deactivated, since the buttons are moved into the navigationbar. */}
                         {/* <div className='lg:w-[30%] w-full bg-white p-4 rounded-xl shadow'>
                             <h2 className='mb-4 text-xl font-semibold'>My Functions</h2>
                             <DashboardAdminFunctions/>
