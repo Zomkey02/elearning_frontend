@@ -25,13 +25,14 @@ import UpdateLesson from './pages/lessons/UpdateLesson'
 import Blog from './pages/blog/Blog'
 import About from './pages/About'
 import Contact from './pages/Contact'
+import RootError from './errors/RootError'
 
 
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
-      <Route path="/" element={<RootLayout/>}>
+      <Route path="/" element={<RootLayout/>} errorElement={<RootError/>}>
         <Route index element={<Home/>} />
 
         <Route path="elearning" element={<ELearning/>} />
