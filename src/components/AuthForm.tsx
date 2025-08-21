@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-
 import {useForm} from 'react-hook-form'
 //import {DevTool} from '@hookform/devtools'
 import type { AuthFormData, AuthFormProps } from '../types/Types'
@@ -7,6 +6,14 @@ import http from '../utils/http';
 
 import { IconContext } from "react-icons";
 import { RiEyeLine, RiEyeOffLine  } from "react-icons/ri";
+
+interface ErrorResponse {
+  response?: {
+    data?: {
+      errors?: Record<string, string[]>;
+    };
+  };
+}
 
 const AuthForm: React.FC<AuthFormProps> = ({
   legend,
@@ -24,6 +31,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
     register,
     handleSubmit,
     watch,
+    setError,
     formState: { errors, isSubmitting },
   } = useForm<AuthFormData>();
 
@@ -32,12 +40,20 @@ const AuthForm: React.FC<AuthFormProps> = ({
       await http.get('/sanctum/csrf-cookie');
       await http.post(endpoint, data);
       onSuccess();
-    } catch (error:any) {
-      if (error.response?.data?.errors){
-        console.error('Validation errors', error.response.data.errors);
-      } else {
-        console.error('Form submission failed', error);
-      }
+    } catch (error) {
+        const err = error as ErrorResponse;
+        const validationErrors = err.response?.data?.errors;
+
+        if(validationErrors) {
+          Object.keys(validationErrors).forEach((field) => {
+            setError(field as keyof AuthFormData, {
+              type:'manual',
+              message: validationErrors[field][0],
+            });
+          });
+        } else {
+          console.error('Form submission failed', error);
+        }
     }
   }; 
 
