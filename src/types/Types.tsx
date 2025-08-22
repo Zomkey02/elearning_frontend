@@ -14,3 +14,10 @@ export type AuthFormProps = {
   includePasswordConfirmation?: boolean;
 };
 
+export interface ErrorResponse {
+  response?: {
+    data?: {
+      errors?: Record<string, string[]>;
+    };
+  };
+}

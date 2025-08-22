@@ -5,15 +5,8 @@ import { useForm } from 'react-hook-form';
 import http from '../../utils/http';
 import type { CourseFormValues } from '../../types/elearning';
 import { SectionLoader } from '../../components/Loading';
+import type { ErrorResponse } from '../../types/Types';
 
-
-interface ErrorResponse {
-  response?: {
-    data?: {
-      errors?: Record<string, string[]>;
-    };
-  };
-}
 
 const UpdateCourse = () => {
   const { courseId } = useParams();

@@ -1,19 +1,13 @@
 import React, { useState } from 'react'
 import {useForm} from 'react-hook-form'
 //import {DevTool} from '@hookform/devtools'
-import type { AuthFormData, AuthFormProps } from '../types/Types'
+import type { AuthFormData, AuthFormProps, ErrorResponse } from '../types/Types'
 import http from '../utils/http';
 
 import { IconContext } from "react-icons";
 import { RiEyeLine, RiEyeOffLine  } from "react-icons/ri";
 
-interface ErrorResponse {
-  response?: {
-    data?: {
-      errors?: Record<string, string[]>;
-    };
-  };
-}
+
 
 const AuthForm: React.FC<AuthFormProps> = ({
   legend,

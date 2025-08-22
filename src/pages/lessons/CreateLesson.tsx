@@ -4,15 +4,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import http from '../../utils/http';
 import type { LessonFormValues } from '../../types/elearning';
+import type { ErrorResponse } from '../../types/Types';
 
-
-interface ErrorResponse {
-  response?: {
-    data?: {
-      errors?: Record<string, string[]>;
-    };
-  };
-}
 
 const CreateLesson = () => {
   const navigate = useNavigate();
