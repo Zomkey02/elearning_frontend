@@ -1,54 +1,38 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Prototype FF Academy
+This is the frontend of the E-Learning platform on investing, built as part of a Bachelor’s thesis project.
+The application is designed to deliver a modern, responsive, and user-friendly interface. The frontend interacts with a Laravel backend API to provide access to courses, lessons, lessontracking of authenticated users.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Browse:** Non-Registered-Users can enjoy the website and explore the courses and lessons without any registration. 
 
-## Expanding the ESLint configuration
+- **User Authentication:** Users can register, log in, update their profile and log out to manage their progress of lessons. They can as well delete their profiles.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Create and Manage Course and Lessons:** Admins can create new course and lesson, edit existing courses and lessons, and delete them as well.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Getting Started
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+1. **Clone the Repository:**
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+2. **Install Dependencies and DevDependencies:**
+   
+3. **Start the Development Server:**
+    - npm run dev
+    - Open in Browser under 'http://localhost:5173'
+
+4. **Technologies Used:**
+    - React (react, react-dom)
+    - TypeScript
+    - Vite
+    - React Router DOM
+    - React Hook Form
+    - Vitest
+    - React Testing Library
+    - jsdom (DOM simulation for testing)
+    - Axios (for HTTP requests)
+    - Dompuritfy (HTML sanitization)
+    - Tailwind CSS (for styling)
+    - Slugify (Generate slugs for URLs)
+    - React Icons (Icons library)
