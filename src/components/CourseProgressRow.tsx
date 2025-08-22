@@ -42,7 +42,7 @@ const CourseProgressRow: React.FC<Props> =({course, showCaption = true}) => {
     <div className=' mb-2.5'>
       <div className='flex items-center justify-between'>
 
-        {showCaption && ( <p className='text-sm'>{caption}</p> )}
+        {showCaption && ( <p className='text-lg'>{caption}</p> )}
         <span className='text-sm'>{percentLabel}</span>
 
       </div>
@@ -56,7 +56,6 @@ const CourseProgressRow: React.FC<Props> =({course, showCaption = true}) => {
         >
         </div>
       </div>
-
     </div>
   )
 }

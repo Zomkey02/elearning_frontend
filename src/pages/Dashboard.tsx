@@ -7,11 +7,11 @@ const Dashboard: React.FC = () => {
     const {user, isAdmin} = useAuth();
     
   return (
-    <div className='max-w-screen-xl p-5 mx-auto'>
-        <div className='p-4 border border-gray-300 rounded-md shadow'>
+    <div className='max-w-screen-xl p-5 mx-auto '>
+        <div className='p-4 border border-gray-300 rounded-md shadow w-lg md:w-3xl'>
 
             <div>
-                <h1>
+                <h1 className='text-xl'>
                     Welcome back, { user?.username }
                 </h1>
             </div>

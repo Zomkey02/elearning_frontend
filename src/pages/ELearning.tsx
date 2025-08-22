@@ -42,7 +42,7 @@ const ELearning: React.FC = () => {
   const filteredCourses = courses.filter(course => course.category === selectedCategory);
   
   return (
-    <div className='grid max-w-6xl place-items-center'>
+    <div className='grid justify-center px-4 place-items-center'>
 
       <h1 className='mb-4 text-3xl font-bold'>E-Learning</h1>
 
@@ -63,7 +63,7 @@ const ELearning: React.FC = () => {
       </div>
       
       {/* Course View */}
-      <div className='p-6 shadow-lg bg-primary_lighter min-h-[400px] w-full flex items-center justify-center rounded-bl-md rounded-br-md rounded-tr-md'>
+      <div className='flex items-center justify-center w-full max-w-[711px]  p-6 shadow-lg bg-primary_lighter rounded-bl-md rounded-br-md rounded-tr-md'>
         {filteredCourses.length > 0 ? (
           <div className='grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3'>
           {filteredCourses.map((course) => (
@@ -75,9 +75,12 @@ const ELearning: React.FC = () => {
           ))}
         </div>
         ): (
-          <p className='text-center'>
-            no courses
-          </p>
+          <div className='w-full min-h-[352px] min-w-[711px] flex p-6  items-center justify-center'>
+              <p className='text-center'>
+              no courses
+            </p>
+          </div>
+          
         )}        
       </div>
 

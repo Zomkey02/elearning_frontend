@@ -22,7 +22,6 @@
 }
 
 @theme {
-
   --font-manrope: "Manrope", "sans-serif";
 
   --color-primary: #6DAE81;      
@@ -73,7 +72,7 @@
 @layer components {
   /* Custom Link Styles */
   .link-nav {
-    @apply block lg:inline-block font-semibold text-primary hover:text-[#5b986f] ;
+    @apply block lg:inline-block font-semibold text-primary hover:text-dark transition;
   }
   /* Custom button sytles*/
   .btn-hero{
@@ -89,7 +88,7 @@
   }
   
   .btn-nav {
-    @apply bg-primary cursor-pointer text-white px-3 py-1 rounded-lg font-semibold hover:shadow-md transition;
+    @apply bg-primary cursor-pointer text-white px-3 py-1 rounded-lg font-semibold hover:shadow-lg transition;
   }
 
   .btn-edit {

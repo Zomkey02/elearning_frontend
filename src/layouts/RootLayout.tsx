@@ -5,11 +5,11 @@ import Footer from '../components/layout/Footer'
 const RootLayout = () => {
   return (
     <div>
-      <header className='relative inset-x-0 top-0 z-50 items-center md:px-[3%] lg:px-[4%]'>
+      <header>
         <Navbar/>
       </header>
       
-      <main className='px-[8%]'>
+      <main className='flex flex-col justify-center bg-light'>
         <Outlet />
       </main>
       <footer>

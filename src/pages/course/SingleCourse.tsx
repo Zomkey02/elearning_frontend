@@ -9,21 +9,6 @@ import { useAuth } from '../../hooks/useAuth'
 import { PageLoader } from '../../components/Loading'
 import CourseProgressRow from '../../components/CourseProgressRow'
 
-/* interface Lesson {
-    id: number
-    title: string
-    description: string
-}
-
-interface SingleCourse {
-    courseId: number
-    title: string
-    thumbnail?: string
-    summary: string
-    description: string
-    lessons?: Lesson[]
-} */
-
 type CourseResponse = { course: Course };
 
 const SingleCourse: React.FC = () => {
@@ -91,7 +76,7 @@ const SingleCourse: React.FC = () => {
                     className="object-cover w-full h-64 rounded-lg shadow"
                     />
                 ) : (
-                <div className='flex items-center justify-center w-full h-64 text-gray-600 bg-gray-300 rounded-lg shadow'>
+                <div className='flex items-center justify-center w-full h-64 bg-gray-300 rounded-lg shadow'>
                     No Image
                 </div>
             )}
@@ -102,22 +87,26 @@ const SingleCourse: React.FC = () => {
         </div>
 
         <div className='mt-6'>
-            <h2 className='mb-4 text-2xl font-semibold'>Lessons</h2>
 
-            {isLoggedIn && (
-                <CourseProgressRow course={course} showCaption={true} />
-            )}
+            <div className='flex items-center justify-between space-x-4 '>
 
-            {isAdmin && (
-                <div className='mb-10'>
-                    <div className='flex flex-wrap gap-4'>
+                <h2 className='text-2xl font-bold text-primary'>LESSONS</h2>
+
+                {isAdmin && (
+                    <div className='flex flex-wrap'>
                         <Link to={`/course/${courseId}/lesson/create`} className='btn-primary'>
                             Create Lesson
                         </Link>
                     </div>
+                )}
+            </div>
+           
+            {isLoggedIn && (
+                <div className='mt-4'>
+                    <CourseProgressRow course={course} showCaption={true} />
                 </div>
             )}
-            
+
             {course.lessons && course.lessons.length > 0 ? (        
                 course.lessons?.map((lesson: Lesson) => (
                     <LessonCard

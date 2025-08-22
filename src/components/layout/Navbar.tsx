@@ -13,11 +13,11 @@ const Navbar = () => {
   const closeMenu = useCallback(() => setOpen(false), []);
 
   return (
-      <div className="w-full">
-        <div className='flex items-center w-full py-4 mx-auto max-w-7xl'>
+      <div className='flex flex-col items-center justify-center w-full '>
+        <div className='flex items-center w-full px-6 py-2 max-w-7xl'>
           {/* LOGO */}
           <NavLink to="/" className='flex items-center ml-0 mr-4' onClick={closeMenu}>
-            <img src={LogoOne} alt="Logo" className='w-auto sm:h-6 md:h-10 lg:h-15 xl:h-19'/>
+            <img src={LogoOne} alt="Logo" className='w-auto h-19'/>
           </NavLink>
           
           {/* DESKTOP NAV-Links */}
@@ -69,7 +69,7 @@ const Navbar = () => {
         </div>
         {/* MOBILE NAV links */}  
         {open && (
-          <div className='pb-4 space-y-2 lg:hidden'>
+          <div className='flex flex-col justify-start w-full px-6 pb-4 space-y-2 lg:hidden'>
             <NavLink to='/elearning' className='link-nav' onClick={closeMenu}>E-Learning</NavLink>
             <NavLink to='/blog' className='link-nav' onClick={closeMenu}>Blog</NavLink>
             <NavLink to='/about' className='link-nav' onClick={closeMenu}>About</NavLink>
@@ -83,7 +83,7 @@ const Navbar = () => {
             {isLoggedIn ? ( <LogOut isVisible={true} /> ) : (
               <>
                 <NavLink to='/login' className='link-nav' onClick={closeMenu}>Login</NavLink>
-                <NavLink to='/signup' className='btn-nav' onClick={closeMenu}>Sign up</NavLink>
+                <NavLink to='/signup' className='text-center btn-nav max-w-30' onClick={closeMenu}>Sign up</NavLink>
               </>
             )}       
           </div>
