@@ -10,6 +10,7 @@ import LessonCompleteButton from '../../components/LessonCompleteButton';
 import LayoutImgLeft from '../../components/lesson/LayoutImgLeft';
 import LayoutInteractive from '../../components/lesson/LayoutInteractive';
 import { PageLoader } from '../../components/Loading';
+import { useAuth } from '../../hooks/useAuth';
 
 
 /* interface SingleLesson {
@@ -31,6 +32,7 @@ const SingleLesson: React.FC = () =>{
   const [lesson, setLesson ] = useState<Lesson | null>(null);
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const {isLoggedIn} = useAuth();
 
   useEffect(() => {
     if (!courseId || !lessonId) {
@@ -72,12 +74,16 @@ const SingleLesson: React.FC = () =>{
   return (
     <div className='max-w-4xl p-6 mx-auto space-y-6'>
       <Layout lesson={lesson} />
-      <div className={`flex ${lesson.layout_type === 'image-left' ? 'justify-end': 'justify-start'}`}>
-        <LessonCompleteButton
-          courseId={Number(courseId)}
-          lessonId={Number(lessonId)}
-         />
-      </div>
+      
+
+      {isLoggedIn && (
+        <div className={`flex ${lesson.layout_type === 'image-left' ? 'justify-end': 'justify-start'}`}>
+          <LessonCompleteButton
+            courseId={Number(courseId)}
+            lessonId={Number(lessonId)}
+          />
+        </div>
+      )}
       
     </div>
   )

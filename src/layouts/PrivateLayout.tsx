@@ -3,7 +3,7 @@ import { useAuth } from '../hooks/useAuth';
 import { PageLoader } from '../components/Loading';
 
 const PrivateLayout = () => {
-    /* const { auth } = useContext(AuthContext); */
+  /* const { auth } = useContext(AuthContext); */
   const { isLoading, isLoggedIn} = useAuth();
   const location = useLocation();
 

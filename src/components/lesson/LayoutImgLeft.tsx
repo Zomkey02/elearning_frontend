@@ -41,18 +41,8 @@ export default function LayoutImgLeft({lesson}: LessonResponse) {
           <SafeHTML html={lesson.content} className='mb-5 max-w-none' />
         </div>
 
-      </div>
-
-      Investing 101 is your ultimate guide to understanding the world of investing. It is kept simple and short, focusing on the most important aspects without boring jargons.
-      
-    
-          
-    
-            
-            
-          
-          
-          
+      </div>        
+ 
     
     </div>
   );
