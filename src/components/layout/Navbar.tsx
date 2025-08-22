@@ -8,7 +8,7 @@ import { useAuth } from "../../hooks/useAuth";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
-  const {isLoggedIn} = useAuth();
+  const {isLoggedIn, isAdmin} = useAuth();
 
   const closeMenu = useCallback(() => setOpen(false), []);
 
@@ -31,17 +31,30 @@ const Navbar = () => {
                   to='/elearning' 
                   className={({isActive}) =>`link-nav ${isActive ? 'border-b-2 border-primary' : ''}` }
                 >E-Learning</NavLink>
-                <NavLink to='/blog' className='link-nav' >Blog</NavLink> 
-                <NavLink to='/about' className='link-nav' >About</NavLink>
+                <NavLink 
+                  to='/blog' 
+                  className={({isActive}) =>`link-nav ${isActive ? 'border-b-2 border-primary' : ''}` }
+                  >Blog</NavLink> 
+                <NavLink 
+                  to='/about' 
+                  className={({isActive}) =>`link-nav ${isActive ? 'border-b-2 border-primary' : ''}` } 
+                >About</NavLink>
               </div>
 
               {/* right nav links */}
               <div className='items-center hidden gap-4 lg:flex'>
-                {isLoggedIn && (
+                {isAdmin && (
                   <>
-                    <NavLink to='/course/create' className='link-nav'>Create Course</NavLink>
-                    <NavLink to='/lesson/create' className='link-nav'>Create Lesson</NavLink>
-                    <NavLink to='/dashboard' className='link-nav' >My Profile</NavLink>
+                    <NavLink to='/course/create' className={({isActive}) =>`link-nav ${isActive ? 'border-b-2 border-primary' : ''}` }>Create Course</NavLink>
+                    <NavLink to='/lesson/create' className={({isActive}) =>`link-nav ${isActive ? 'border-b-2 border-primary' : ''}` }>Create Lesson</NavLink>
+                    <NavLink to='/dashboard' className={({isActive}) =>`link-nav ${isActive ? 'border-b-2 border-primary' : ''}` } >My Profile</NavLink>
+                  </>
+                )}
+
+                {isLoggedIn && !isAdmin && (
+                  <>
+                    <NavLink to='/contact' className={({isActive}) =>`link-nav ${isActive ? 'border-b-2 border-primary' : ''}` } >Contact</NavLink>
+                    <NavLink to='/dashboard' className={({isActive}) =>`link-nav ${isActive ? 'border-b-2 border-primary' : ''}` } >My Profile</NavLink>
                   </>
                 )}
 

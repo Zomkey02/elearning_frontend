@@ -106,8 +106,8 @@ const CourseForm: React.FC<CourseFormProps> = ({ onSubmit, defaultValues, mode }
         </div>
         
         {defaultValues?.thumbnailUrl && (
-          <div className="mb-4">
-            <p className="mb-1 text-sm">Current Thumbnail:</p>
+          <div className='max-h-[100px] flex items-center justify-start text-center bg-gray-200 rounded-xl py-14'>
+            <p className='mb-1 text-lg pr-2.5'>Current Thumbnail:</p>
             <img 
               src={defaultValues.thumbnailUrl} 
               alt="Thumbnail" 
@@ -117,7 +117,7 @@ const CourseForm: React.FC<CourseFormProps> = ({ onSubmit, defaultValues, mode }
         )}
 
         <div>
-          <label className='max-h-[100px] flex flex-col items-center justify-center px-6 text-center cursor-pointer rounded-xl py-14 bg-primary'>
+          <label className='max-h-[100px] flex flex-col items-center justify-center px-2 text-center cursor-pointer rounded-xl py-14 bg-primary'>
             <p className='mb-1 text-lg font-bold tracking-tight text-white'>Upload Thumbnail</p>
             <p className='text-sm text-white '>Click to upload</p>
             <input type="file" className='hidden'
@@ -129,7 +129,7 @@ const CourseForm: React.FC<CourseFormProps> = ({ onSubmit, defaultValues, mode }
 
         <div>
           <textarea 
-            {...register('summary', { required: 'Summary is required' })} 
+            {...register('summary', { required: 'Summary is required', maxLength: {value:100, message: 'Summary cannot exceed 100 Characters'} })} 
             placeholder='Summary' 
             className='form-input min-h-[100px]' 
           />

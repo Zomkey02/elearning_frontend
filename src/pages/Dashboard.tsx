@@ -7,8 +7,8 @@ const Dashboard: React.FC = () => {
     const {user, isAdmin} = useAuth();
     
   return (
-    <div className='max-w-screen-xl p-5 mx-auto '>
-        <div className='p-4 border border-gray-300 rounded-md shadow w-lg md:w-3xl'>
+    <div className='max-w-screen-xl min-h-screen p-5 mx-auto '>
+        <div className='p-6 border border-gray-300 rounded-md shadow w-lg md:w-3xl'>
 
             <div>
                 <h1 className='text-xl'>
@@ -16,14 +16,13 @@ const Dashboard: React.FC = () => {
                 </h1>
             </div>
 
-            <div className='flex mb-8 '>
+            <div className='mb-20 '>
 
-                {isAdmin ? (
-                    <div className='w-full'>
-                        {/* Admin functions*/}
-                        <div className='w-full p-4 bg-white shadow rounded-xl'>
-                            <DashboardProfileCard/>
-                        </div>
+                <div className='w-full space-y-6'>
+                        
+                    <div className='w-full p-4 bg-white shadow rounded-xl'>
+                        <DashboardProfileCard/>
+                    </div>
                         
                         {/* Following functions were deactivated, since the buttons are moved into the navigationbar. */}
                         {/* <div className='lg:w-[30%] w-full bg-white p-4 rounded-xl shadow'>
@@ -31,22 +30,12 @@ const Dashboard: React.FC = () => {
                             <DashboardAdminFunctions/>
                         </div> */}
 
-                        <div className='w-full p-4'>
-                            <DashboardUserProgress />
-                        </div>
+                    <div className='w-full p-4 bg-white shadow rounded-xl'>
+                        <DashboardUserProgress />
+                    </div>
                         
                     </div>
-                ) : (
-                    <>
-                        {/* Profil info*/}
-                        <div className='p-4 bg-white shadow lg:w-[50%} w-full rounded-xl'>
-                            <DashboardProfileCard/>
-                        </div>
-                        <div className='lg:w-[40%]'>
-                            <DashboardUserProgress />
-                        </div>
-                    </>
-                )}
+                
             </div>
         </div>
     </div>

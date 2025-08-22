@@ -27,7 +27,7 @@ const CourseCard:React.FC<CourseCardProps> = ({ course, onDelete }) => {
   };
 
   return (
-    <div className='overflow-hidden bg-white shadow-md rounded-xl'>
+    <div className='h-auto overflow-hidden bg-white shadow-md max-w-70 rounded-xl'>
         <Link to={`/course/${course.id}`}>
 
             {/* Thumbnail */}

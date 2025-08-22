@@ -82,14 +82,14 @@ const DashboardProfileCard = () => {
                     </div>
                 </div>
                 <div className='flex w-full gap-3'>
-                    <button className='flex-shrink-0 btn-edit' onClick={() => setEditing(true)}>
+                    <button className='self-start flex-shrink-0  btn-edit' onClick={() => setEditing(true)}>
                         Edit Profile
                     </button>
 
                     {!confirmDelete ? (
                         <button className='btn-delete' onClick={() => setConfirmDelete(true)}>Delete User</button>
                     ): (
-                        <div className='flex items-center w-full gap-2'>
+                        <div className='flex flex-col w-full gap-2'>
                             <input 
                                 type="password"
                                 placeholder='Enter current password'
@@ -97,7 +97,7 @@ const DashboardProfileCard = () => {
                                 onChange={(e) => setDeletePassword(e.target.value)}
                                 className='max-w-xs h-9 auth-input'
                             />
-                            <div className='flex gap-2'>
+                            <div className='flex justify-between max-w-xs gap-2'>
                                 <button className='btn-cancel' onClick={() => {setConfirmDelete(false); setDeletePassword('');}}>Cancel</button>
                                 <button className='text-white btn-delete bg-danger' onClick={handleDeleteUser}>Confirm Delete</button>
                             </div>

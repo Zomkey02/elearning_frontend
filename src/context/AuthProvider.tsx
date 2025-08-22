@@ -36,6 +36,7 @@ const AuthProvider = ({ children }: Props) => {
     useEffect(() => {
         const getAuth = async () => {
             try {
+                await http.get('/sanctum/csrf-cookie');
                 const userData = await http.get('/api/user');
                 setAuth({
                 data: {
@@ -47,7 +48,7 @@ const AuthProvider = ({ children }: Props) => {
                 status: 'loggedIn',
                 });
             } catch (error) {
-                console.error('User not authenticated:', error);
+                /* console.error('User not authenticated:', error); */
                 setAuth({
                 data: null,
                 status: 'loggedOut',

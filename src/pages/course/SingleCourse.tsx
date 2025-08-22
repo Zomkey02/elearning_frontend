@@ -67,14 +67,17 @@ const SingleCourse: React.FC = () => {
     
   return (
     <div className='max-w-4xl p-6 mx-auto space-y-6'>
-        <div className='space-y-2'>
+
+        <div className='space-y-2 rounded-lg shadow '>
             {/* Thumbnail */}
             {thumbnailUrl ? (
-                <img
-                    src={ thumbnailUrl }
-                    alt={course.title}
-                    className="object-cover w-full h-64 rounded-lg shadow"
+                <>
+                    <img
+                        src={ thumbnailUrl }
+                        alt={course.title}
+                        className='w-full h-auto rounded-lg shadow '
                     />
+                </>
                 ) : (
                 <div className='flex items-center justify-center w-full h-64 bg-gray-300 rounded-lg shadow'>
                     No Image

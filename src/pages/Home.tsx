@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom'
 import LogoThree from '../assets/logos/logo_three.svg'
+import Wave from '../assets/images/BackgroundImg/wave.jpg'
 
 const Home = () => {
   return (
-     <div className='flex flex-col items-center w-full px-6 md:px-10'>
+     <div className='flex flex-col items-center w-full'>
       {/* Hero Section */}      
       <section className='relative h-[70vh] flex items-center justify-center max-w-6xl'>
         {/* Logo Image */}
@@ -16,11 +17,12 @@ const Home = () => {
           <h1 className='tracking-widest text-black uppercase sm:text-5xl md:text-6xl drop-shadow-lg'>
             Grow your money, your way
           </h1>
+          
         </div>
       </section>
 
       {/* Learn Investing Section */}
-      <section className='max-w-4xl px-6 py-16 mx-auto text-center'>
+      <section className='max-w-4xl px-16 py-16 mx-auto text-center'>
         <h2 className='mb-6 text-4xl md:text-5xl'>
           Learn investing, made easy
         </h2>
@@ -39,18 +41,31 @@ const Home = () => {
       </section>
 
       {/* E-LEARNING PREVIEW IMAGE */}
-      <section className='flex justify-center w-full max-w-6xl pb-12'>
-        <div className='flex items-center justify-center w-full bg-gray-300 shadow-md h-70 rounded-xl'>
+      <section className='relative flex justify-center w-full px-20 pb-12 mx-auto overflow-hidden rounded-xl'>
+
+        
+        <div className='absolute inset-0 z-10 bg-accent'>
+        
+        <img 
+            src={Wave} 
+            alt='Leaf Img as background' 
+            className='absolute inset-0 object-cover '
+        />
+        </div>
+
+
+        <div className='relative z-20 flex items-center justify-center w-full bg-gray-200 rounded-lg h-70'>
           <span className='text-lg font-semibold text-dark'>E-Learning Page Preview Placeholder</span>
+          
         </div>
       </section>
 
       {/* Numbering Section*/}
-      <section className='max-w-6xl px-6 py-10 rounded-lg bg-accent drop-shadow-lg md:drop-shadow-md'>
+      <section className='w-full px-20 py-10 -mt-2 rounded-t-none rounded-b-lg bg-accent'>
         <div className='flex flex-col items-center justify-center max-w-6xl gap-12 mx-auto md:flex-row'>
           {/* LEFT TITLE */}
           <div className='text-center md:w-1/3 md:text-left'>
-            <h2 className='font-bold md:text-4xl xl:text-6xl'>
+            <h2 className='font-bold md:text-4xl xl:text-5xl'>
               It’s about time you had a place to learn investing that actually makes sense and feels like it’s made for you.
             </h2>
           </div>
@@ -59,7 +74,7 @@ const Home = () => {
           <div className='space-y-8 md:w-2/3'>
             {/* Feature 1 */}
             <div className='flex items-center'>
-              <div className='mr-3 font-semibold text-right w-15 text-9xl xl:text-7xl text-primary shrink-0'>1</div>
+              <div className='mr-3 font-semibold text-center w-15 text-8xl xl:text-7xl text-primary shrink-0'>1</div>
               <div className='ml-4'>
                 <h3 className='text-2xl md:text-xl'>Made to Feel Like Home</h3>
                 <p className='text-lg'>
@@ -69,7 +84,7 @@ const Home = () => {
             </div>
             {/* Feature 2 */}
             <div className='flex items-center'>
-              <div className='mr-3 font-semibold text-center w-15 text-9xl xl:text-7xl text-primary shrink-0'>2</div>
+              <div className='mr-3 font-semibold text-center w-15 text-8xl xl:text-7xl text-primary shrink-0'>2</div>
               <div className='ml-4'>
                 <h3 className='text-2xl md:text-xl'>No Finance Degree Required</h3>
                 <p className='text-lg'>
@@ -79,7 +94,7 @@ const Home = () => {
             </div>
             {/* Feature 3 */}
             <div className='flex items-center'>
-              <div className='mr-3 font-semibold text-center w-15 text-9xl xl:text-7xl text-primary shrink-0'>3</div>
+              <div className='mr-3 font-semibold text-center w-15 text-8xl xl:text-7xl text-primary shrink-0'>3</div>
               <div className='ml-4'>
                 <h3 className='text-2xl md:text-xl'>Learn Your Way, On Your Time</h3>
                 <p className='text-lg'>
@@ -89,7 +104,7 @@ const Home = () => {
             </div>
             {/* Feature 4 */}
             <div className='flex items-center'>
-              <div className='mr-3 font-semibold text-center w-15 text-9xl xl:text-7xl text-primary shrink-0'>4</div>
+              <div className='mr-3 font-semibold text-center w-15 text-8xl xl:text-7xl text-primary shrink-0'>4</div>
               <div className='ml-4'>
                 <h3 className='text-2xl md:text-xl'>Built for Real Life</h3>
                 <p className='text-lg'>
@@ -102,7 +117,7 @@ const Home = () => {
       </section>
 
       {/* Blog Section */}
-      <section className='max-w-6xl py-16'>
+      <section className='max-w-6xl px-10 py-16'>
         <h2 className='mb-12 text-2xl text-center md:text-4xl'>
           But it's more than just E-Learning, stay updated with current Finance News!
         </h2>

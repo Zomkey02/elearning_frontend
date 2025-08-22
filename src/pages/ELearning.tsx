@@ -2,23 +2,26 @@ import React, { useEffect, useState } from 'react'
 import CourseCard from '../components/course/CourseCard'
 import http from '../utils/http'
 import type {Course} from '../types/elearning'
-
-import { useAuth } from "../hooks/useAuth";
+import { SectionLoader } from '../components/Loading';
 
 type CourseResponse = { courses: Course[] };
 
 const ELearning: React.FC = () => {
   const [courses, setCourses] = useState<Course[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('investing-basics');
-  const {isAdmin} = useAuth();
+  const [loading, setLoading] = useState(false);
+
 
   useEffect(() => {
     const fetchCourses = async () => {
+      setLoading(true);
       try {
         const {data} = await http.get<CourseResponse>(`/api/courses`);
         setCourses(Array.isArray(data.courses) ? data.courses : []);
       } catch (error) {
         console.error('Failed to fetch courses:', error);
+      }finally {
+        setLoading(false);
       }
     };
     fetchCourses();
@@ -42,9 +45,9 @@ const ELearning: React.FC = () => {
   const filteredCourses = courses.filter(course => course.category === selectedCategory);
   
   return (
-    <div className='grid justify-center px-4 place-items-center'>
+    <div className='grid justify-center px-4 place-items-center '>
 
-      <h1 className='mb-4 text-3xl font-bold'>E-Learning</h1>
+      <h1 className='py-5 mb-4 text-3xl font-bold'>Explore our courses to secure your future!</h1>
 
       <div className='flex items-center justify-between w-full'>
         <div className='flex mb-0 space-x-4'>
@@ -63,7 +66,13 @@ const ELearning: React.FC = () => {
       </div>
       
       {/* Course View */}
-      <div className='flex items-center justify-center w-full max-w-[711px]  p-6 shadow-lg bg-primary_lighter rounded-bl-md rounded-br-md rounded-tr-md'>
+      <div className='flex items-center justify-center w-full p-6 mb-6 shadow-lg bg-primary_lighter rounded-bl-md rounded-br-md rounded-tr-md'>
+        {loading && (
+          <div className='w-full min-h-[352px] min-w-[711px] flex p-6  items-center justify-center'>
+            <SectionLoader label="Loading courses…" />
+          </div>
+        )}
+        
         {filteredCourses.length > 0 ? (
           <div className='grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3'>
           {filteredCourses.map((course) => (
@@ -75,11 +84,14 @@ const ELearning: React.FC = () => {
           ))}
         </div>
         ): (
-          <div className='w-full min-h-[352px] min-w-[711px] flex p-6  items-center justify-center'>
-              <p className='text-center'>
-              no courses
-            </p>
-          </div>
+          !loading && (
+              <div className='w-full min-h-[352px] min-w-[711px] flex p-6  items-center justify-center'>
+                <p className='text-center'>
+                  no courses
+                </p>
+              </div>
+          )
+          
           
         )}        
       </div>
